@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/LinkManager.Api/bin/Debug/netcoreapp3.1/LinkManager.Api.dll",
-            "args": [],
+            "args": ["--urls","http://localhost:5000"],
             "cwd": "${workspaceFolder}/src/LinkManager.Api",
             "stopAtEntry": false,
             "serverReadyAction": {
