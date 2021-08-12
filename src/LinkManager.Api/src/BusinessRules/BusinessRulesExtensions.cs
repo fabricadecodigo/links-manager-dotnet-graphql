@@ -11,6 +11,7 @@ namespace LinkManager.Api.src.BusinessRules
                 // users
                 .AddScoped<ICreateUserHandler, CreateUserHandler>()
                 .AddScoped<IUpdateUserHandler, UpdateUserHandler>()
+                .AddScoped<IGetUserByIdHandler, GetUserByIdHandler>()
                 .AddScoped<IUpdatePasswordHandler, UpdatePasswordHandler>();
         }
     }
