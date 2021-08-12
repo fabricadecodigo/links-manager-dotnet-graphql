@@ -49,6 +49,7 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
                     Id = response.Id,
                     Name = response.Name,
                     Email = response.Email,
+                    CreateAt = response.CreateAt,
                 }
             };
         }

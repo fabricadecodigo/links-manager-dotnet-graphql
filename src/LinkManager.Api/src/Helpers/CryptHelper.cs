@@ -13,7 +13,7 @@ namespace LinkManager.Api.src.Helpers
 
         public static bool IsValid(string value, string hash)
         {
-            return BCrypt.Net.BCrypt.EnhancedVerify(value, hash);
+            return BCrypt.Net.BCrypt.Verify(value, hash);
         }
     }
 }

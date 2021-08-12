@@ -2,6 +2,7 @@ using LinkManager.Api.src.BusinessRules.Exceptions;
 using LinkManager.Api.src.BusinessRules.Users.Requests;
 using LinkManager.Api.src.BusinessRules.Users.Responses;
 using LinkManager.Domain.src.Repositories;
+using System;
 using System.Threading.Tasks;
 
 namespace LinkManager.Api.src.BusinessRules.Users.Handlers
@@ -30,6 +31,8 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
                 user.Email = request.Email;
             }
 
+            user.UpdateAt = DateTime.Now;
+
             await _repository.UpdateAsync(user.Id, user);
 
             return new UpdateUserResponse
@@ -39,6 +42,8 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
                     Id = user.Id,
                     Name = user.Name,
                     Email = user.Email,
+                    CreateAt = user.CreateAt,
+                    UpdateAt = user.UpdateAt
                 }
             };
         }

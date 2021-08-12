@@ -27,6 +27,8 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
                     Id = user.Id,
                     Name = user.Name,
                     Email = user.Email,
+                    CreateAt = user.CreateAt,
+                    UpdateAt = user.UpdateAt
                 }
             };
         }

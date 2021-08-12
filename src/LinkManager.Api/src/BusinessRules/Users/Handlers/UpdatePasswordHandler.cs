@@ -3,6 +3,7 @@ using LinkManager.Api.src.BusinessRules.Users.Requests;
 using LinkManager.Api.src.BusinessRules.Users.Responses;
 using LinkManager.Api.src.Helpers;
 using LinkManager.Domain.src.Repositories;
+using System;
 using System.Threading.Tasks;
 
 namespace LinkManager.Api.src.BusinessRules.Users.Handlers
@@ -29,6 +30,7 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
             var newPasswordHash = CryptHelper.Encrypt(request.NewPassword);
 
             user.Password = newPasswordHash;
+            user.UpdateAt = DateTime.Now;
             await _repository.UpdateAsync(user.Id, user);
 
             return new UpdatePasswordResponse
@@ -38,6 +40,8 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
                     Id = user.Id,
                     Name = user.Name,
                     Email = user.Email,
+                    CreateAt = user.CreateAt,
+                    UpdateAt = user.UpdateAt
                 }
             };
         }
