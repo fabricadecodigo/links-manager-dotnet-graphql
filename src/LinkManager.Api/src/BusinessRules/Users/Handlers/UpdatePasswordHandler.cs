@@ -10,9 +10,11 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
 {
     public class UpdatePasswordHandler : IUpdatePasswordHandler
     {
+        private readonly ICryptHelper _cryptHelper;
         private readonly IUserRepository _repository;
 
-        public UpdatePasswordHandler(IUserRepository repository) => _repository = repository;
+        public UpdatePasswordHandler(ICryptHelper cryptHelper, IUserRepository repository)
+            => (_cryptHelper, _repository) = (cryptHelper, repository);
 
         public async Task<UpdatePasswordResponse> ExecuteAsync(UpdatePasswordRequest request)
         {
@@ -22,12 +24,12 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
                 throw new NotFoundException("Usuário não encontrado");
             }
 
-            if (!CryptHelper.IsValid(request.CurrentPassword, user.Password))
+            if (!_cryptHelper.IsValid(request.CurrentPassword, user.Password))
             {
                 throw new HotChocolate.GraphQLException("Senha inválida");
             }
 
-            var newPasswordHash = CryptHelper.Encrypt(request.NewPassword);
+            var newPasswordHash = _cryptHelper.Encrypt(request.NewPassword);
 
             user.Password = newPasswordHash;
             user.UpdateAt = DateTime.Now;

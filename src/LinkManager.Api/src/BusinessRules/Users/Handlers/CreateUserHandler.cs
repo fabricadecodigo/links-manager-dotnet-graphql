@@ -14,9 +14,11 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
 {
     public class CreateUserHandler : ICreateUserHandler
     {
+        private readonly ICryptHelper _cryptHelper;
         private readonly IUserRepository _repository;
 
-        public CreateUserHandler(IUserRepository repository) => _repository = repository;
+        public CreateUserHandler(ICryptHelper cryptHelper, IUserRepository repository)
+            => (_cryptHelper, _repository) = (cryptHelper, repository);
 
         public async Task<CreateUserResponse> ExecuteAsync(CreateUserRequest request)
         {
@@ -32,7 +34,7 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
             }
 
             // encriptografar a senha            
-            request.Password = CryptHelper.Encrypt(request.Password);
+            request.Password = _cryptHelper.Encrypt(request.Password);
 
             var response = await _repository.CreateAsync(new User
             {
