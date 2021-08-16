@@ -14,6 +14,7 @@ namespace LinkManager.Api.src.Api
             return services
                 .AddQueryType()
                     .AddTypeExtension<UserQuery>()
+                    .AddTypeExtension<CompanyQuery>()
                 .AddMutationType()
                     .AddTypeExtension<OnboardingMutation>()
                     .AddTypeExtension<AuthenticationMutation>()

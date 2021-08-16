@@ -20,7 +20,8 @@ namespace LinkManager.Api.src.BusinessRules
                 .AddScoped<IGetUserByIdHandler, GetUserByIdHandler>()
                 .AddScoped<IUpdatePasswordHandler, UpdatePasswordHandler>()
                 // Companies
-                .AddScoped<IUpdateCompanyHandler, UpdateCompanyHandler>();
+                .AddScoped<IUpdateCompanyHandler, UpdateCompanyHandler>()
+                .AddScoped<IGetCompanyByIdHandler, GetCompanyByIdHandler>();
         }
     }
 }
