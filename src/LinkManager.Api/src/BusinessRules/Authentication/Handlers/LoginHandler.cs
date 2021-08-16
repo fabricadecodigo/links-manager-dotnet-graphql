@@ -14,23 +14,33 @@ namespace LinkManager.Api.src.BusinessRules.Authentication.Handlers
     {
         private readonly ICryptHelper _cryptHelper;
         private readonly IJwtToken _jwtToken;
-        private readonly IUserRepository _repository;
+        private readonly IUserRepository _userRepository;
+        private readonly ICompanyRepository _companyRepository;
 
         public LoginHandler(
             ICryptHelper cryptHelper,
             IJwtToken jwtToken,
-            IUserRepository repository
-        ) => (_cryptHelper, _jwtToken, _repository) = (cryptHelper, jwtToken, repository);
+            IUserRepository repository,
+            ICompanyRepository companyRepository
+        ) => (_cryptHelper, _jwtToken, _userRepository, _companyRepository) = (cryptHelper, jwtToken, repository, companyRepository);
 
         public async Task<LoginResponse> ExecuteAsync(LoginRequest request)
         {
-            var query = _repository.GetQuery()
+            var userQuery = _userRepository.GetQuery()
                 .Where(q => q.Email == request.Email);
 
-            var user = await _repository.GetOneAsync(query);
+            var user = await _userRepository.GetOneAsync(userQuery);
             if (user == null || !_cryptHelper.IsValid(request.Password, user.Password))
             {
                 throw new NotFoundException("Usuário/Senha inválido(s)");
+            }
+
+            var companyQuery = _companyRepository.GetQuery()
+                .Where(q => q.UserId == user.Id);
+            var company = await _companyRepository.GetOneAsync(companyQuery);
+            if (company == null)
+            {
+                throw new NotFoundException("Empresa não encontrada");
             }
 
             var token = GenerateToken(user);
@@ -45,6 +55,12 @@ namespace LinkManager.Api.src.BusinessRules.Authentication.Handlers
                         Id = user.Id,
                         Name = user.Name,
                         Email = user.Email
+                    },
+                    Company = new LoginResponseCompany
+                    {
+                        Id = company.Id,
+                        Name = company.Name,
+                        Slug = company.Slug
                     }
                 }
             };
