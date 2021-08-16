@@ -14,12 +14,6 @@ namespace LinkManager.Api.src.Api.Users
     public class UserMutation
     {
         [Authorize]
-        public async Task<CreateUserResponse> CreateUser([Service] ICreateUserHandler handler, CreateUserRequest request)
-        {
-            return await handler.ExecuteAsync(request);
-        }
-
-        [Authorize]
         public async Task<UpdateUserResponse> UpdateUser([Service] IUpdateUserHandler handler, ClaimsPrincipal claimsPrincipal, UpdateUserRequest request)
         {
             request.Id = Guid.Parse(claimsPrincipal.FindFirstValue("id"));

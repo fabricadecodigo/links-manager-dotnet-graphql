@@ -1,12 +1,11 @@
 using FluentValidation;
-using LinkManager.Api.src.BusinessRules.Users.Requests;
-using LinkManager.Domain.src.Entities;
+using LinkManager.Api.src.BusinessRules.Onboarding.Requests;
 
-namespace LinkManager.Api.src.BusinessRules.Users.Validators
+namespace LinkManager.Api.src.BusinessRules.Onboarding.Validators
 {
-    public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
+    public class CreateUserValidator : AbstractValidator<CreateAccountRequestUser>
     {
-        public CreateUserRequestValidator()
+        public CreateUserValidator()
         {
             RuleFor(r => r.Name)
                 .NotEmpty()
