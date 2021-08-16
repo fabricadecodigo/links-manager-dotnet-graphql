@@ -1,5 +1,6 @@
 using HotChocolate.Execution.Configuration;
 using LinkManager.Api.src.Api.Authentication;
+using LinkManager.Api.src.Api.Companies;
 using LinkManager.Api.src.Api.Onboarding;
 using LinkManager.Api.src.Api.Users;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,8 @@ namespace LinkManager.Api.src.Api
                 .AddMutationType()
                     .AddTypeExtension<OnboardingMutation>()
                     .AddTypeExtension<AuthenticationMutation>()
-                    .AddTypeExtension<UserMutation>();
+                    .AddTypeExtension<UserMutation>()
+                    .AddTypeExtension<CompanyMutation>();
         }
     }
 }

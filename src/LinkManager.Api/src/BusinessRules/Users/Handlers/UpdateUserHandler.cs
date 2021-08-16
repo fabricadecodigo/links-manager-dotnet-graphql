@@ -21,16 +21,7 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
                 throw new NotFoundException("Usuário não encontrado");
             }
 
-            if (!string.IsNullOrEmpty(request.Name))
-            {
-                user.Name = request.Name;
-            }
-
-            if (!string.IsNullOrEmpty(request.Email))
-            {
-                user.Email = request.Email;
-            }
-
+            user.Name = request.Name;
             user.UpdateAt = DateTime.Now;
 
             await _repository.UpdateAsync(user.Id, user);
