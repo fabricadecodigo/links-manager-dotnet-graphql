@@ -43,7 +43,7 @@ namespace LinkManager.Api.src.BusinessRules.Authentication.Handlers
                 throw new NotFoundException("Empresa não encontrada");
             }
 
-            var token = GenerateToken(user);
+            var token = GenerateToken(user, company);
 
             return new LoginResponse
             {
@@ -66,13 +66,14 @@ namespace LinkManager.Api.src.BusinessRules.Authentication.Handlers
             };
         }
 
-        private string GenerateToken(User user)
+        private string GenerateToken(User user, Company company)
         {
             var claims = new ClaimsIdentity(new Claim[]
             {
                 new Claim("id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
+                new Claim("company", company.Id.ToString())
             });
 
             return _jwtToken.GenerateToken(claims);
