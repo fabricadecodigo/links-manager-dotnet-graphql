@@ -12,7 +12,7 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
 
         public GetUserByIdHandler(IUserRepository repository) => _repository = repository;
 
-        public async Task<GetUserByIdResponse> ExecuteAsync(GetUserByIdRequest request)
+        public async Task<UserResponse> ExecuteAsync(GetUserByIdRequest request)
         {
             var user = await _repository.GetByIdAsync(request.Id);
             if (user == null)
@@ -20,9 +20,9 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
                 throw new NotFoundException("Usuário não encontrado");
             }
 
-            return new GetUserByIdResponse
+            return new UserResponse
             {
-                Payload = new UserResponse()
+                Payload = new UserResponseItem()
                 {
                     Id = user.Id,
                     Name = user.Name,

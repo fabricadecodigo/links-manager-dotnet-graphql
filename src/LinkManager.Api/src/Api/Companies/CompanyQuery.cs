@@ -14,7 +14,7 @@ namespace LinkManager.Api.src.Api.Companies
     public class CompanyQuery
     {
         [Authorize]
-        public async Task<GetCompanyByIdResponse> GetCompany([Service] IGetCompanyByIdHandler handler, ClaimsPrincipal claimsPrincipal, GetCompanyByIdRequest request)
+        public async Task<CompanyResponse> GetCompany([Service] IGetCompanyByIdHandler handler, ClaimsPrincipal claimsPrincipal, GetCompanyByIdRequest request)
         {
             request.UserId = Guid.Parse(claimsPrincipal.FindFirstValue("id"));
             return await handler.ExecuteAsync(request);

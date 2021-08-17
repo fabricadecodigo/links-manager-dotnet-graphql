@@ -16,7 +16,7 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
         public UpdatePasswordHandler(ICryptHelper cryptHelper, IUserRepository repository)
             => (_cryptHelper, _repository) = (cryptHelper, repository);
 
-        public async Task<UpdatePasswordResponse> ExecuteAsync(UpdatePasswordRequest request)
+        public async Task<UserResponse> ExecuteAsync(UpdatePasswordRequest request)
         {
             var user = await _repository.GetByIdAsync(request.Id);
             if (user == null)
@@ -35,9 +35,9 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
             user.UpdateAt = DateTime.Now;
             await _repository.UpdateAsync(user.Id, user);
 
-            return new UpdatePasswordResponse
+            return new UserResponse
             {
-                Payload = new UserResponse
+                Payload = new UserResponseItem
                 {
                     Id = user.Id,
                     Name = user.Name,

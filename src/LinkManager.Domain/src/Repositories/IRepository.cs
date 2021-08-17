@@ -12,6 +12,7 @@ namespace LinkManager.Domain.src.Repositories
         IMongoQueryable<TEntity> GetQuery();
         Task<List<TEntity>> GetAllAsync(IMongoQueryable<TEntity> query);
         Task<TEntity> GetOneAsync(IMongoQueryable<TEntity> query);
+        Task<bool> ExistsAsync(IMongoQueryable<TEntity> query);
         Task<TEntity> GetByIdAsync(Guid id);
         Task<TEntity> CreateAsync(TEntity entity);
         Task<TEntity> UpdateAsync(Guid id, TEntity entity);

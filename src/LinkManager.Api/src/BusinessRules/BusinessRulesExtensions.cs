@@ -3,6 +3,7 @@ using LinkManager.Api.src.BusinessRules.Authentication.Handlers;
 using LinkManager.Api.src.BusinessRules.Users.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using LinkManager.Api.src.BusinessRules.Companies.Handlers;
+using LinkManager.Api.src.BusinessRules.Links.Handlers;
 
 namespace LinkManager.Api.src.BusinessRules
 {
@@ -21,7 +22,13 @@ namespace LinkManager.Api.src.BusinessRules
                 .AddScoped<IUpdatePasswordHandler, UpdatePasswordHandler>()
                 // Companies
                 .AddScoped<IUpdateCompanyHandler, UpdateCompanyHandler>()
-                .AddScoped<IGetCompanyByIdHandler, GetCompanyByIdHandler>();
+                .AddScoped<IGetCompanyByIdHandler, GetCompanyByIdHandler>()
+                // Links
+                .AddScoped<ICreateLinkHandler, CreateLinkHandler>()
+                .AddScoped<IUpdateLinkHandler, UpdateLinkHandler>()
+                .AddScoped<IDeleteLinkHandler, DeleteLinkHandler>()
+                .AddScoped<IGetLinkByIdHandler, GetLinkByIdHandler>()
+                .AddScoped<IGetLinkListHandler, GetLinkListHandler>();
         }
     }
 }

@@ -3,7 +3,7 @@ using LinkManager.Api.src.BusinessRules.Users.Responses;
 
 namespace LinkManager.Api.src.BusinessRules.Users.Handlers
 {
-    public interface IUpdatePasswordHandler : IBusinessRuleHandler<UpdatePasswordRequest, UpdatePasswordResponse, UserResponse>
+    public interface IUpdatePasswordHandler : IBusinessRuleHandler<UpdatePasswordRequest, UserResponse, UserResponseItem>
     {
          
     }

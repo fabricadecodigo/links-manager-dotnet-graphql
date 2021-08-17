@@ -30,6 +30,12 @@ namespace LinkManager.Domain.src.Repositories
             return entity;
         }
 
+        public async Task<bool> ExistsAsync(IMongoQueryable<TEntity> query)
+        {
+            var exists = await query.AnyAsync();
+            return exists;
+        }
+
         public async Task<TEntity> GetByIdAsync(Guid id)
         {
             var entity = await GetCollection()

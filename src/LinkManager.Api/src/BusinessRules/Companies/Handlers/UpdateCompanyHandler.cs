@@ -34,7 +34,7 @@ namespace LinkManager.Api.src.BusinessRules.Companies.Handlers
 
             return new UpdateCompanyResponse
             {
-                Payload = new CompanyReponse()
+                Payload = new CompanyReponseItem()
                 {
                     Id = company.Id,
                     Name = company.Name,

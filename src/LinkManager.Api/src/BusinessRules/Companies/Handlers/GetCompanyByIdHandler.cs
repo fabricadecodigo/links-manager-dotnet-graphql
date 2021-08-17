@@ -14,7 +14,7 @@ namespace LinkManager.Api.src.BusinessRules.Companies.Handlers
 
         public GetCompanyByIdHandler(ICompanyRepository repository) => _repository = repository;
 
-        public async Task<GetCompanyByIdResponse> ExecuteAsync(GetCompanyByIdRequest request)
+        public async Task<CompanyResponse> ExecuteAsync(GetCompanyByIdRequest request)
         {
             var companyQuery = _repository.GetQuery()
                 .Where(q =>
@@ -27,9 +27,9 @@ namespace LinkManager.Api.src.BusinessRules.Companies.Handlers
                 throw new NotFoundException("Empresa não encontrada");
             }
 
-            return new GetCompanyByIdResponse
+            return new CompanyResponse
             {
-                Payload = new CompanyReponse
+                Payload = new CompanyReponseItem
                 {
                     Id = company.Id,
                     Name = company.Name,

@@ -14,7 +14,7 @@ namespace LinkManager.Api.src.Api.Users
     public class UserQuery
     {
         [Authorize]
-        public async Task<GetUserByIdResponse> GetMe([Service] IGetUserByIdHandler handler, ClaimsPrincipal claimsPrincipal)
+        public async Task<UserResponse> GetMe([Service] IGetUserByIdHandler handler, ClaimsPrincipal claimsPrincipal)
         {
             var userId = claimsPrincipal.FindFirstValue("id");
             return await handler.ExecuteAsync(new GetUserByIdRequest {

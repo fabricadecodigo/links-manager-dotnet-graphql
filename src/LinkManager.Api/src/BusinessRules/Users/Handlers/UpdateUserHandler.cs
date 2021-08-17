@@ -13,7 +13,7 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
 
         public UpdateUserHandler(IUserRepository repository) => _repository = repository;
 
-        public async Task<UpdateUserResponse> ExecuteAsync(UpdateUserRequest request)
+        public async Task<UserResponse> ExecuteAsync(UpdateUserRequest request)
         {
             var user = await _repository.GetByIdAsync(request.Id);
             if (user == null)
@@ -26,9 +26,9 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
 
             await _repository.UpdateAsync(user.Id, user);
 
-            return new UpdateUserResponse
+            return new UserResponse
             {
-                Payload = new UserResponse()
+                Payload = new UserResponseItem()
                 {
                     Id = user.Id,
                     Name = user.Name,
