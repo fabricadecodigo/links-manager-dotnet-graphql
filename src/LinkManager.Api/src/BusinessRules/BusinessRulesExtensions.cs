@@ -4,6 +4,7 @@ using LinkManager.Api.src.BusinessRules.Users.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using LinkManager.Api.src.BusinessRules.Companies.Handlers;
 using LinkManager.Api.src.BusinessRules.Links.Handlers;
+using LinkManager.Api.src.BusinessRules.Emails.Handlers;
 
 namespace LinkManager.Api.src.BusinessRules
 {
@@ -28,7 +29,9 @@ namespace LinkManager.Api.src.BusinessRules
                 .AddScoped<IUpdateLinkHandler, UpdateLinkHandler>()
                 .AddScoped<IDeleteLinkHandler, DeleteLinkHandler>()
                 .AddScoped<IGetLinkByIdHandler, GetLinkByIdHandler>()
-                .AddScoped<IGetLinkListHandler, GetLinkListHandler>();
+                .AddScoped<IGetLinkListHandler, GetLinkListHandler>()
+                // Emails
+                .AddScoped<ISendWellcomeMailHandler, SendWellcomeMailHandler>();
         }
     }
 }

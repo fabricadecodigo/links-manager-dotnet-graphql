@@ -14,4 +14,10 @@ namespace LinkManager.Api.src.BusinessRules
     {
         Task<TResponse> ExecuteAsync(TRequest request);
     }
+
+    public interface IBusinessRuleHandler<TRequest>
+        where TRequest: BusinessRuleRequest        
+    {
+         Task ExecuteAsync(TRequest request);
+    }
 }

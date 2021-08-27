@@ -64,6 +64,7 @@ namespace LinkManager.Api
                 .AddMongoDbContext(Configuration);
 
             services
+                .AddHttpClient()
                 .AddHelpers()
                 .AddBusinessRules();
         }

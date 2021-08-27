@@ -1,4 +1,6 @@
 using FluentValidation;
+using LinkManager.Api.src.BusinessRules.Emails.Handlers;
+using LinkManager.Api.src.BusinessRules.Emails.Requests;
 using LinkManager.Api.src.BusinessRules.Exceptions;
 using LinkManager.Api.src.BusinessRules.Onboarding.Requests;
 using LinkManager.Api.src.BusinessRules.Onboarding.Responses;
@@ -17,17 +19,19 @@ namespace LinkManager.Api.src.BusinessRules.Onboarding.Handlers
         private readonly IUserRepository _userRepository;
         private readonly ICompanyRepository _companyRepository;
         private readonly ICryptHelper _cryptHelper;
+        private readonly ISendWellcomeMailHandler _sendWellcomeMailHandler;
 
         public CreateAccountHandler(
             IUserRepository userRepository,
             ICompanyRepository companyRepository,
-            ICryptHelper cryptHelper
-
+            ICryptHelper cryptHelper,
+            ISendWellcomeMailHandler sendWellcomeMailHandler
         )
         {
             _userRepository = userRepository;
             _companyRepository = companyRepository;
             _cryptHelper = cryptHelper;
+            _sendWellcomeMailHandler = sendWellcomeMailHandler;
         }
 
         public async Task<CreateAccountResponse> ExecuteAsync(CreateAccountRequest request)
@@ -36,7 +40,14 @@ namespace LinkManager.Api.src.BusinessRules.Onboarding.Handlers
             await ValidateCompany(request.Company);
 
             var user = await CreateUser(request.User);
-            await CreateCompany(request.Company, user.Id);
+            await CreateCompany(request.Company, user.Id);            
+
+            // send wellcome email
+            await _sendWellcomeMailHandler.ExecuteAsync(new SendMailRequest
+            {
+                Name = user.Name,
+                Email = user.Email
+            });
 
             return new CreateAccountResponse
             {
