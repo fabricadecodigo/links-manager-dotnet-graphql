@@ -2,6 +2,8 @@ namespace LinkManager.Api.src.Helpers
 {
     public interface IEmailTemplateHelper
     {
-         string GetEmailTempalte(EmailTemplate identifier);
+         IEmailTemplateHelper SetTemplate(EmailTemplate identifier);
+         IEmailTemplateHelper SetData(object data);
+         string Build();
     }
 }

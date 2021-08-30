@@ -4,6 +4,7 @@ namespace LinkManager.Api.src.Helpers
 {
     public enum EmailTemplate
     {
-        WELLCOME
+        WELLCOME,
+        FORGOT_PASSWORD
     }    
 }

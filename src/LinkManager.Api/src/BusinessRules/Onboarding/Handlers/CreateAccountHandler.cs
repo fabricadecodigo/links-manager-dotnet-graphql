@@ -26,8 +26,7 @@ namespace LinkManager.Api.src.BusinessRules.Onboarding.Handlers
             IUserRepository userRepository,
             ICompanyRepository companyRepository,
             ICryptHelper cryptHelper,
-            ISendWellcomeEmailHandler sendWellcomeMailHandler,
-            ILogger<CreateAccountHandler> logger
+            ISendWellcomeEmailHandler sendWellcomeMailHandler
         )
         {
             _userRepository = userRepository;
@@ -63,8 +62,7 @@ namespace LinkManager.Api.src.BusinessRules.Onboarding.Handlers
             new CreateUserValidator().ValidateAndThrow(request);
 
             // validar se já existe um usuário
-            var existsUserQuery = _userRepository.GetQuery().Where(q => q.Email == request.Email);
-            var existsUsers = await _userRepository.GetOneAsync(existsUserQuery);
+            var existsUsers = await _userRepository.GetByEmailAsync(request.Email);
             if (existsUsers != null)
             {
                 throw new ConflictException("O email informado já está sendo usado.");

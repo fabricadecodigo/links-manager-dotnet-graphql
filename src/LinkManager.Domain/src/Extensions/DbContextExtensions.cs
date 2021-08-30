@@ -16,7 +16,8 @@ namespace LinkManager.Domain.src.Extensions
                     ))
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<ICompanyRepository, CompanyRepository>()
-                .AddScoped<ILinkRepository, LinkRepository>();
+                .AddScoped<ILinkRepository, LinkRepository>()
+                .AddScoped<IForgotPasswordRepository, ForgotPasswordRepository>();
         }
     }
 }

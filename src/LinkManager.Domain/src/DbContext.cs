@@ -17,5 +17,8 @@ namespace LinkManager.Domain.src
         
         public IMongoCollection<Link> Links =>
             _db.GetCollection<Link>("links");
+
+        public IMongoCollection<ForgotPassword> ForgotPasswords =>
+            _db.GetCollection<ForgotPassword>("ForgotPasswords");
     }
 }

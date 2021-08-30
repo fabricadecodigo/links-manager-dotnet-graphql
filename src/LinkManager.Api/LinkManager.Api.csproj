@@ -20,5 +20,6 @@
   
   <ItemGroup>
     <EmbeddedResource Include="$(ProjectDir)\src\BusinessRules\Emails\Templates\wellcome.html" />
+    <EmbeddedResource Include="$(ProjectDir)\src\BusinessRules\Emails\Templates\forgot-password.html" />
   </ItemGroup>
 </Project>

@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace LinkManager.Domain.src.Repositories
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public class ForgotPasswordRepository : Repository<ForgotPassword>, IForgotPasswordRepository
     {
-        public UserRepository(DbContext db) : base(db)
+        public ForgotPasswordRepository(DbContext db) : base(db)
         {
         }
 
-        public override IMongoCollection<User> GetCollection()
+        public override IMongoCollection<ForgotPassword> GetCollection()
         {
-            return _db.User;
+            return _db.ForgotPasswords;
         }
 
-        public async Task<User> GetByEmailAsync(string email)
+        public async Task<ForgotPassword> GetByEmailAsync(string email)
         {
             var query = GetQuery()
                 .Where(q => q.Email == email);

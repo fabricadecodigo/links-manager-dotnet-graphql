@@ -26,5 +26,20 @@ namespace LinkManager.Api.src.Api.Users
             request.Id = Guid.Parse(claimsPrincipal.FindFirstValue("id"));
             return await handler.ExecuteAsync(request);
         }
+
+        public async Task<ForgotPasswordResponse> ForgotPassword([Service] IForgotPassowordHandler handler, ForgotPasswordRequest request)
+        {
+            return await handler.ExecuteAsync(request);
+        }
+
+        public async Task<ForgotPasswordExpiredResponse> ForgotPasswordExpired([Service] IForgotPasswordExpiredHandler handler, ForgotPasswordExpiredRequest request)
+        {
+            return await handler.ExecuteAsync(request);
+        }
+
+        public async Task<ResetPasswordResponse> ResetPassword([Service] IResetPasswordHandler handler, ResetPasswordRequest request)
+        {
+            return await handler.ExecuteAsync(request);
+        }
     }
 }

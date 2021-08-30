@@ -15,23 +15,32 @@ namespace LinkManager.Api.src.BusinessRules
             return services
                 // Onboarding
                 .AddScoped<ICreateAccountHandler, CreateAccountHandler>()
+                
                 // Authentication
                 .AddScoped<ILoginHandler, LoginHandler>()
+
                 // users
                 .AddScoped<IUpdateUserHandler, UpdateUserHandler>()
                 .AddScoped<IGetUserByIdHandler, GetUserByIdHandler>()
                 .AddScoped<IUpdatePasswordHandler, UpdatePasswordHandler>()
+                .AddScoped<IForgotPassowordHandler, ForgotPassowordHandler>()
+                .AddScoped<IForgotPasswordExpiredHandler, ForgotPasswordExpiredHandler>()
+                .AddScoped<IResetPasswordHandler, ResetPasswordHandler>()
+
                 // Companies
                 .AddScoped<IUpdateCompanyHandler, UpdateCompanyHandler>()
                 .AddScoped<IGetCompanyByIdHandler, GetCompanyByIdHandler>()
+                
                 // Links
                 .AddScoped<ICreateLinkHandler, CreateLinkHandler>()
                 .AddScoped<IUpdateLinkHandler, UpdateLinkHandler>()
                 .AddScoped<IDeleteLinkHandler, DeleteLinkHandler>()
                 .AddScoped<IGetLinkByIdHandler, GetLinkByIdHandler>()
                 .AddScoped<IGetLinkListHandler, GetLinkListHandler>()
+                
                 // Emails
-                .AddScoped<ISendWellcomeEmailHandler, SendWellcomeEmailHandler>();
+                .AddScoped<ISendWellcomeEmailHandler, SendWellcomeEmailHandler>()
+                .AddScoped<ISendForgotPasswordEmailHandler, SendForgotPasswordEmailHandler>();
         }
     }
 }
