@@ -9,7 +9,8 @@ namespace LinkManager.Api.src.Helpers
             return services
                 .AddScoped<ICryptHelper, CryptHelper>()
                 .AddScoped<IJwtToken, JwtToken>()
-                .AddScoped<IMailSenderHelper, MailSenderHelper>();
+                .AddScoped<IMailSenderHelper, MailSenderHelper>()
+                .AddScoped<IEmailTemplateHelper, EmailTemplateHelper>();
         }
     }
 }

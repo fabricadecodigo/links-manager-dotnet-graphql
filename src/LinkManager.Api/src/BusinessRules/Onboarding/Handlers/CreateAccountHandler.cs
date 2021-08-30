@@ -8,6 +8,7 @@ using LinkManager.Api.src.BusinessRules.Onboarding.Validators;
 using LinkManager.Api.src.Helpers;
 using LinkManager.Domain.src.Entities;
 using LinkManager.Domain.src.Repositories;
+using Microsoft.Extensions.Logging;
 using MongoDB.Driver.Linq;
 using System;
 using System.Threading.Tasks;
@@ -19,19 +20,20 @@ namespace LinkManager.Api.src.BusinessRules.Onboarding.Handlers
         private readonly IUserRepository _userRepository;
         private readonly ICompanyRepository _companyRepository;
         private readonly ICryptHelper _cryptHelper;
-        private readonly ISendWellcomeMailHandler _sendWellcomeMailHandler;
+        private readonly ISendWellcomeEmailHandler _sendWellcomeEmailHandler;        
 
         public CreateAccountHandler(
             IUserRepository userRepository,
             ICompanyRepository companyRepository,
             ICryptHelper cryptHelper,
-            ISendWellcomeMailHandler sendWellcomeMailHandler
+            ISendWellcomeEmailHandler sendWellcomeMailHandler,
+            ILogger<CreateAccountHandler> logger
         )
         {
             _userRepository = userRepository;
             _companyRepository = companyRepository;
             _cryptHelper = cryptHelper;
-            _sendWellcomeMailHandler = sendWellcomeMailHandler;
+            _sendWellcomeEmailHandler = sendWellcomeMailHandler;
         }
 
         public async Task<CreateAccountResponse> ExecuteAsync(CreateAccountRequest request)
@@ -40,10 +42,10 @@ namespace LinkManager.Api.src.BusinessRules.Onboarding.Handlers
             await ValidateCompany(request.Company);
 
             var user = await CreateUser(request.User);
-            await CreateCompany(request.Company, user.Id);            
+            await CreateCompany(request.Company, user.Id);
 
             // send wellcome email
-            await _sendWellcomeMailHandler.ExecuteAsync(new SendMailRequest
+            await _sendWellcomeEmailHandler.ExecuteAsync(new SendEmailRequest
             {
                 Name = user.Name,
                 Email = user.Email

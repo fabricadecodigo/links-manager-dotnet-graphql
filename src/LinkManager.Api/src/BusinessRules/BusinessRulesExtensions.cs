@@ -31,7 +31,7 @@ namespace LinkManager.Api.src.BusinessRules
                 .AddScoped<IGetLinkByIdHandler, GetLinkByIdHandler>()
                 .AddScoped<IGetLinkListHandler, GetLinkListHandler>()
                 // Emails
-                .AddScoped<ISendWellcomeMailHandler, SendWellcomeMailHandler>();
+                .AddScoped<ISendWellcomeEmailHandler, SendWellcomeEmailHandler>();
         }
     }
 }
