@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="6.0.3" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="FluentValidation" Version="10.3.0" />
     <PackageReference Include="Handlebars.Net" Version="2.0.9" />
@@ -16,6 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\LinkManager.Domain\LinkManager.Domain.csproj" />
   </ItemGroup>
-
-
+  
+  <ItemGroup>
+    <EmbeddedResource Include="$(ProjectDir)\src\BusinessRules\Emails\Templates\wellcome.html" />
+  </ItemGroup>
 </Project>
