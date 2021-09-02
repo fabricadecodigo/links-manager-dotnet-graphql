@@ -1,15 +1,17 @@
-using LinkManager.Api.src.Helpers;
+
 
 namespace LinkManager.Api.src.BusinessRules.Emails.Handlers
 {
+    using LinkManager.Helpers.Email;
+
     public abstract class SendEmailHandler
     {
-        protected readonly IMailSenderHelper _mailSenderHelper;
+        protected readonly IEmailSenderHelper _emailSenderHelper;
         protected readonly IEmailTemplateHelper _emailTemplateHelper;
 
         public SendEmailHandler(
-            IMailSenderHelper mailSenderHelper, 
+            IEmailSenderHelper mailSenderHelper, 
             IEmailTemplateHelper emailTemplateHelper) 
-        => (_mailSenderHelper, _emailTemplateHelper) = (mailSenderHelper, emailTemplateHelper);
+        => (_emailSenderHelper, _emailTemplateHelper) = (mailSenderHelper, emailTemplateHelper);
     }
 }

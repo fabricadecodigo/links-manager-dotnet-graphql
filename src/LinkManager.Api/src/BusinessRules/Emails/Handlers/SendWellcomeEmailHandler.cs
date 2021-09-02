@@ -1,10 +1,5 @@
-using HandlebarsDotNet;
 using LinkManager.Api.src.BusinessRules.Emails.Requests;
-using LinkManager.Api.src.Helpers;
-using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Reflection;
+using LinkManager.Helpers.Email;
 using System.Threading.Tasks;
 
 namespace LinkManager.Api.src.BusinessRules.Emails.Handlers
@@ -12,9 +7,9 @@ namespace LinkManager.Api.src.BusinessRules.Emails.Handlers
     public class SendWellcomeEmailHandler : SendEmailHandler, ISendWellcomeEmailHandler
     {
         public SendWellcomeEmailHandler(
-            IMailSenderHelper mailSenderHelper,
+            IEmailSenderHelper emailSenderHelper,
             IEmailTemplateHelper emailTemplateHelper
-            ) : base(mailSenderHelper, emailTemplateHelper)
+            ) : base(emailSenderHelper, emailTemplateHelper)
         {
         }
 
@@ -25,7 +20,7 @@ namespace LinkManager.Api.src.BusinessRules.Emails.Handlers
                 .SetData(request.Data)
                 .Build();
 
-            await _mailSenderHelper
+            await _emailSenderHelper
                 .SetSubject("Bem vindo ao LinksManager")
                 .SetTo(request.Name, request.Email)
                 .SetHtml(html)

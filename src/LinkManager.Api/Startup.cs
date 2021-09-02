@@ -1,23 +1,16 @@
 using HotChocolate.Types;
 using LinkManager.Api.src.Api;
 using LinkManager.Api.src.BusinessRules;
-using LinkManager.Api.src.Helpers;
 using LinkManager.Domain.src.Extensions;
+using LinkManager.Helpers.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkManager.Api
 {
@@ -50,7 +43,7 @@ namespace LinkManager.Api
                         ValidateAudience = true, // por padrão é true
                     };
                 });
-                
+
             services
                 .AddGraphQLServer()
                 .AddAuthorization()
@@ -76,7 +69,7 @@ namespace LinkManager.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app
                 .UseRouting()
                 .UseAuthentication()

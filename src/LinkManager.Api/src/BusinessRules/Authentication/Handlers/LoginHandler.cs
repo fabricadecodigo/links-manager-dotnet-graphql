@@ -1,9 +1,10 @@
 using LinkManager.Api.src.BusinessRules.Authentication.Requests;
 using LinkManager.Api.src.BusinessRules.Authentication.Responses;
 using LinkManager.Api.src.BusinessRules.Exceptions;
-using LinkManager.Api.src.Helpers;
 using LinkManager.Domain.src.Entities;
 using LinkManager.Domain.src.Repositories;
+using LinkManager.Helpers.Crypt;
+using LinkManager.Helpers.Jwt;
 using MongoDB.Driver.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;

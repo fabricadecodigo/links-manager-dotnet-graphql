@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace LinkManager.Api.src.Helpers
+namespace LinkManager.Helpers.Jwt
 {
     public interface IJwtToken
     {

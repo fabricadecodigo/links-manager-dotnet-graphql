@@ -1,8 +1,6 @@
-using System;
-
-// https://github.com/BcryptNet/bcrypt.net
-namespace LinkManager.Api.src.Helpers
+namespace LinkManager.Helpers.Crypt
 {
+    // https://github.com/BcryptNet/bcrypt.net
     public class CryptHelper : ICryptHelper
     {
         public string Encrypt(string value)

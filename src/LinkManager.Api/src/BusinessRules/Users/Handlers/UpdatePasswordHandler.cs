@@ -1,8 +1,8 @@
 using LinkManager.Api.src.BusinessRules.Exceptions;
 using LinkManager.Api.src.BusinessRules.Users.Requests;
 using LinkManager.Api.src.BusinessRules.Users.Responses;
-using LinkManager.Api.src.Helpers;
 using LinkManager.Domain.src.Repositories;
+using LinkManager.Helpers.Crypt;
 using System;
 using System.Threading.Tasks;
 

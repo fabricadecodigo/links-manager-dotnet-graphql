@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-namespace LinkManager.Api.src.Helpers
+namespace LinkManager.Helpers.Email
 {
     public class EmailTemplateHelper : IEmailTemplateHelper
     {
@@ -41,14 +41,14 @@ namespace LinkManager.Api.src.Helpers
             var templateName = GetTemplateName(identifier);
             var templateFullName = $"LinkManager.Api.src.BusinessRules.Emails.Templates.{templateName}.html";
 
-            using var stream = Assembly
-                .GetExecutingAssembly()
-                .GetManifestResourceStream(templateFullName);
-
-            using var reader = new StreamReader(stream);
-            var source = reader.ReadToEnd();
-
-            return source;
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(templateFullName))
+            {
+                using (var reader = new StreamReader(stream))
+                {
+                    var source = reader.ReadToEnd();
+                    return source;
+                }
+            }
         }
 
         private string GetTemplateName(EmailTemplate identifier)

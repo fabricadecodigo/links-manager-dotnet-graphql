@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace LinkManager.Api.src.Helpers
+namespace LinkManager.Helpers.Email
 {
     public enum EmailTemplate
     {

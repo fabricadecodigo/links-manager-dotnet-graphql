@@ -5,10 +5,9 @@ using LinkManager.Api.src.BusinessRules.Exceptions;
 using LinkManager.Api.src.BusinessRules.Onboarding.Requests;
 using LinkManager.Api.src.BusinessRules.Onboarding.Responses;
 using LinkManager.Api.src.BusinessRules.Onboarding.Validators;
-using LinkManager.Api.src.Helpers;
 using LinkManager.Domain.src.Entities;
 using LinkManager.Domain.src.Repositories;
-using Microsoft.Extensions.Logging;
+using LinkManager.Helpers.Crypt;
 using MongoDB.Driver.Linq;
 using System;
 using System.Threading.Tasks;
@@ -20,7 +19,7 @@ namespace LinkManager.Api.src.BusinessRules.Onboarding.Handlers
         private readonly IUserRepository _userRepository;
         private readonly ICompanyRepository _companyRepository;
         private readonly ICryptHelper _cryptHelper;
-        private readonly ISendWellcomeEmailHandler _sendWellcomeEmailHandler;        
+        private readonly ISendWellcomeEmailHandler _sendWellcomeEmailHandler;
 
         public CreateAccountHandler(
             IUserRepository userRepository,
@@ -48,7 +47,8 @@ namespace LinkManager.Api.src.BusinessRules.Onboarding.Handlers
             {
                 Name = user.Name,
                 Email = user.Email,
-                Data = new {
+                Data = new
+                {
                     name = user.Name
                 }
             });

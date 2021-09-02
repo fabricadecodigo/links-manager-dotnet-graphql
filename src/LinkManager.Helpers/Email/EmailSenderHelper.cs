@@ -1,4 +1,3 @@
-using HotChocolate;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,18 +6,18 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace LinkManager.Api.src.Helpers
+namespace LinkManager.Helpers.Email
 {
-    public class MailSenderHelper : IMailSenderHelper
+    public class EmailSenderHelper : IEmailSenderHelper
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
         private readonly HttpClient _httpClient;
         private readonly EmailData _emailData;
 
-        public MailSenderHelper(
+        public EmailSenderHelper(
             IConfiguration configuration,
-            ILogger<MailSenderHelper> logger,
+            ILogger<EmailSenderHelper> logger,
             IHttpClientFactory httpClientFactory
         )
         {
@@ -30,13 +29,13 @@ namespace LinkManager.Api.src.Helpers
             var email = _configuration.GetValue("Email:Email", "");
 
             if (string.IsNullOrEmpty(apiKey))
-                throw new GraphQLException("A chave da api para enviar e-mail não foi configurada");
+                throw new Exception("A chave da api para enviar e-mail não foi configurada");
             if (string.IsNullOrEmpty(apiUrl))
-                throw new GraphQLException("A url da api para enviar e-mail não foi configurada");
+                throw new Exception("A url da api para enviar e-mail não foi configurada");
             if (string.IsNullOrEmpty(name))
-                throw new GraphQLException("O nome do remetente do email não foi configurado");
+                throw new Exception("O nome do remetente do email não foi configurado");
             if (string.IsNullOrEmpty(email))
-                throw new GraphQLException("O email do remetente do email não foi configurado");
+                throw new Exception("O email do remetente do email não foi configurado");
 
             _emailData = new EmailData();
             _emailData.Sender.Name = name;
@@ -47,13 +46,13 @@ namespace LinkManager.Api.src.Helpers
             _httpClient.DefaultRequestHeaders.Add("api-key", apiKey);
         }
 
-        public IMailSenderHelper SetSubject(string subject)
+        public IEmailSenderHelper SetSubject(string subject)
         {
             _emailData.Subject = subject;
             return this;
         }
 
-        public IMailSenderHelper SetTo(string name, string email)
+        public IEmailSenderHelper SetTo(string name, string email)
         {
             _emailData.To.Add(new EmailContact
             {
@@ -63,7 +62,7 @@ namespace LinkManager.Api.src.Helpers
             return this;
         }
 
-        public IMailSenderHelper SetHtml(string html)
+        public IEmailSenderHelper SetHtml(string html)
         {
             _emailData.HtmlContent = html;
             return this;
@@ -78,7 +77,7 @@ namespace LinkManager.Api.src.Helpers
                     IgnoreNullValues = true,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 });
-                
+
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
                 await _httpClient.PostAsync("smtp/email", content);
             }

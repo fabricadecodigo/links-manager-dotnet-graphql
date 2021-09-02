@@ -1,4 +1,4 @@
-namespace LinkManager.Api.src.Helpers
+namespace LinkManager.Helpers.Email
 {
     public interface IEmailTemplateHelper
     {

@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace LinkManager.Api.src.Helpers
+namespace LinkManager.Helpers.Jwt
 {
     public class JwtToken : IJwtToken
     {

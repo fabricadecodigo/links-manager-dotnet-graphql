@@ -1,5 +1,5 @@
 using LinkManager.Api.src.BusinessRules.Emails.Requests;
-using LinkManager.Api.src.Helpers;
+using LinkManager.Helpers.Email;
 using System.Threading.Tasks;
 
 namespace LinkManager.Api.src.BusinessRules.Emails.Handlers
@@ -7,8 +7,8 @@ namespace LinkManager.Api.src.BusinessRules.Emails.Handlers
     public class SendForgotPasswordEmailHandler : SendEmailHandler, ISendForgotPasswordEmailHandler
     {
         public SendForgotPasswordEmailHandler(
-            IMailSenderHelper mailSenderHelper, 
-            IEmailTemplateHelper emailTemplateHelper) : base(mailSenderHelper, emailTemplateHelper)
+            IEmailSenderHelper emailSenderHelper,
+            IEmailTemplateHelper emailTemplateHelper) : base(emailSenderHelper, emailTemplateHelper)
         {
         }
 
@@ -19,7 +19,7 @@ namespace LinkManager.Api.src.BusinessRules.Emails.Handlers
                 .SetData(request.Data)
                 .Build();
 
-            await _mailSenderHelper
+            await _emailSenderHelper
                 .SetSubject("Recuperar sua senha do LinksManager")
                 .SetTo(request.Name, request.Email)
                 .SetHtml(html)
