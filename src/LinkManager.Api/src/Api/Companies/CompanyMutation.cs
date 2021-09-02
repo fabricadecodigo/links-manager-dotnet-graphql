@@ -14,7 +14,7 @@ namespace LinkManager.Api.src.Api.Companies
     public class CompanyMutation
     {
         [Authorize]
-        public async Task<UpdateCompanyResponse> UpdateUser([Service] IUpdateCompanyHandler handler, ClaimsPrincipal claimsPrincipal, UpdateCompanyRequest request)
+        public async Task<UpdateCompanyResponse> UpdateCompany([Service] IUpdateCompanyHandler handler, ClaimsPrincipal claimsPrincipal, UpdateCompanyRequest request)
         {
             request.UserId = Guid.Parse(claimsPrincipal.FindFirstValue("id"));
             return await handler.ExecuteAsync(request);

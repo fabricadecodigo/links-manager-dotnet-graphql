@@ -23,10 +23,10 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
             var forgotPassword = await _forgotPasswordRepository.GetByIdAsync(request.Id);
             if (forgotPassword == null)
             {
-                throw new NotFoundException();
+                throw new NotFoundException("Solicitação não encontrada");
             }
 
-            var exipired = DateTime.Now > forgotPassword.ExpireIn;
+            var exipired = DateTime.Now > forgotPassword.ExpireIn.ToLocalTime();
 
             return new ForgotPasswordExpiredResponse
             {

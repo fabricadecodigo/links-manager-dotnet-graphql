@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace LinkManager.Api.src.Api.Links
 {
-    [ExtendObjectType(OperationTypeNames.Mutation)]
+    [ExtendObjectType(OperationTypeNames.Query)]
     public class LinkQuery
     {
         [Authorize]
         public async Task<LinkResponse> GetLink([Service] IGetLinkByIdHandler handler, ClaimsPrincipal claimsPrincipal, GetLinkByIdRequest request)
         {
-            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("companyId"));
+            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
             return await handler.ExecuteAsync(request);
         }
 
         [Authorize]
         public async Task<LinkListResponse> GetLinks([Service] IGetLinkListHandler handler, ClaimsPrincipal claimsPrincipal, GetLinkListRequest request)
         {
-            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("companyId"));
+            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
             return await handler.ExecuteAsync(request);
         }
 

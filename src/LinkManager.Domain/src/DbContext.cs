@@ -19,6 +19,6 @@ namespace LinkManager.Domain.src
             _db.GetCollection<Link>("links");
 
         public IMongoCollection<ForgotPassword> ForgotPasswords =>
-            _db.GetCollection<ForgotPassword>("ForgotPasswords");
+            _db.GetCollection<ForgotPassword>("forgotPasswords");
     }
 }

@@ -14,10 +14,13 @@ namespace LinkManager.Api.src.Api.Companies
     public class CompanyQuery
     {
         [Authorize]
-        public async Task<CompanyResponse> GetCompany([Service] IGetCompanyByIdHandler handler, ClaimsPrincipal claimsPrincipal, GetCompanyByIdRequest request)
+        public async Task<CompanyResponse> GetCompany([Service] IGetCompanyByIdHandler handler, ClaimsPrincipal claimsPrincipal)
         {
-            request.UserId = Guid.Parse(claimsPrincipal.FindFirstValue("id"));
-            return await handler.ExecuteAsync(request);
+            var userId = Guid.Parse(claimsPrincipal.FindFirstValue("id"));
+            return await handler.ExecuteAsync(new GetCompanyByIdRequest
+            {
+                UserId = userId
+            });
         }
     }
 }

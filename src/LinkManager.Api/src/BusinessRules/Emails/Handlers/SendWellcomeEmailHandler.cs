@@ -22,9 +22,7 @@ namespace LinkManager.Api.src.BusinessRules.Emails.Handlers
         {
             var html = _emailTemplateHelper
                 .SetTemplate(EmailTemplate.WELLCOME)
-                .SetData(new {
-                    name = request.Name
-                })
+                .SetData(request.Data)
                 .Build();
 
             await _mailSenderHelper

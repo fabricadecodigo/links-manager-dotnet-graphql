@@ -16,10 +16,7 @@ namespace LinkManager.Api.src.BusinessRules.Emails.Handlers
         {
             var html = _emailTemplateHelper
                 .SetTemplate(EmailTemplate.FORGOT_PASSWORD)
-                .SetData(new {
-                    name = request.Name,
-                    url = ""
-                })
+                .SetData(request.Data)
                 .Build();
 
             await _mailSenderHelper

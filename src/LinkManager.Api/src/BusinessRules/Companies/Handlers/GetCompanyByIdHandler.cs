@@ -16,12 +16,7 @@ namespace LinkManager.Api.src.BusinessRules.Companies.Handlers
 
         public async Task<CompanyResponse> ExecuteAsync(GetCompanyByIdRequest request)
         {
-            var companyQuery = _repository.GetQuery()
-                .Where(q =>
-                    q.Id == request.Id
-                    && q.UserId == request.UserId
-                );
-            var company = await _repository.GetOneAsync(companyQuery);
+            var company = await _repository.GetByUserIdAsync(request.UserId);
             if (company == null)
             {
                 throw new NotFoundException("Empresa não encontrada");
@@ -33,7 +28,9 @@ namespace LinkManager.Api.src.BusinessRules.Companies.Handlers
                 {
                     Id = company.Id,
                     Name = company.Name,
-                    Slug = company.Slug
+                    Slug = company.Slug,
+                    CreateAt = company.CreateAt,
+                    UpdateAt = company.UpdateAt
                 }
             };
         }

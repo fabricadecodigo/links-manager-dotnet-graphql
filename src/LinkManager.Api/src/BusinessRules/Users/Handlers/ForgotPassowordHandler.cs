@@ -5,6 +5,7 @@ using LinkManager.Api.src.BusinessRules.Users.Requests;
 using LinkManager.Api.src.BusinessRules.Users.Responses;
 using LinkManager.Domain.src.Entities;
 using LinkManager.Domain.src.Repositories;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
@@ -12,16 +13,19 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
 {
     public class ForgotPassowordHandler : IForgotPassowordHandler
     {
+        private readonly string _forgotPasswordUrl;
         private readonly IUserRepository _userRepository;
         private readonly IForgotPasswordRepository _forgotPasswordRepository;
         private readonly ISendForgotPasswordEmailHandler _sendForgotPasswordEmailHandler;
 
         public ForgotPassowordHandler(
+            IConfiguration configuration,
             IUserRepository userRepository,
             IForgotPasswordRepository forgotPasswordRepository,
             ISendForgotPasswordEmailHandler sendForgotPasswordEmailHandler
         )
         {
+            _forgotPasswordUrl = configuration.GetValue("ForgotPasswordUrl", "");
             _userRepository = userRepository;
             _forgotPasswordRepository = forgotPasswordRepository;
             _sendForgotPasswordEmailHandler = sendForgotPasswordEmailHandler;
@@ -64,7 +68,11 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
             await _sendForgotPasswordEmailHandler.ExecuteAsync(new SendEmailRequest()
             {
                 Name = user.Name,
-                Email = user.Email
+                Email = user.Email,
+                Data = new {
+                    name = user.Name,
+                    url = $"{_forgotPasswordUrl}/{forgotPassword.Id}"
+                }
             });
 
             return new ForgotPasswordResponse()

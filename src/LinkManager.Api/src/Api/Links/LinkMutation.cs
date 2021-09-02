@@ -16,21 +16,21 @@ namespace LinkManager.Api.src.Api.Links
         [Authorize]
         public async Task<LinkResponse> CreateLink([Service] ICreateLinkHandler handler, ClaimsPrincipal claimsPrincipal, CreateLinkRequest request)
         {
-            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("companyId"));
+            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
             return await handler.ExecuteAsync(request);
         }
 
         [Authorize]
         public async Task<LinkResponse> UpdateLink([Service] IUpdateLinkHandler handler, ClaimsPrincipal claimsPrincipal, UpdateLinkRequest request)
         {
-            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("companyId"));
+            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
             return await handler.ExecuteAsync(request);
         }
 
         [Authorize]
         public async Task<DeleteLinkResponse> DeleteLink([Service] IDeleteLinkHandler handler, ClaimsPrincipal claimsPrincipal, DeleteLinkRequest request)
         {
-            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("companyId"));
+            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
             return await handler.ExecuteAsync(request);
         }
     }

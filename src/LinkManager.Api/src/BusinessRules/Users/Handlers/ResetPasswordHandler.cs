@@ -32,7 +32,7 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
             var forgotPassword = await _forgotPasswordRepository.GetByIdAsync(request.Id);
             if (forgotPassword == null)
             {
-                throw new NotFoundException();
+                throw new NotFoundException("Solicitação não encontrada");
             };
 
             var expiredResponse = await _forgotPasswordExpiredHandler.ExecuteAsync(new ForgotPasswordExpiredRequest
@@ -41,7 +41,7 @@ namespace LinkManager.Api.src.BusinessRules.Users.Handlers
             });
             if (expiredResponse.Payload)
             {
-                throw new UnprocessableEntityException("A solicitação de reset de senha está expirado. Por favor inicie o processo novamente.");
+                throw new UnprocessableEntityException("A solicitação de reset de senha está expirada. Por favor inicie o processo novamente.");
             }
 
             var user = await _userRepository.GetByEmailAsync(forgotPassword.Email);

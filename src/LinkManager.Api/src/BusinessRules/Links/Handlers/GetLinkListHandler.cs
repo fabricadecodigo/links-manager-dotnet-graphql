@@ -43,7 +43,9 @@ namespace LinkManager.Api.src.BusinessRules.Links.Handlers
                         Id = l.Id,
                         Title = l.Title,
                         Uri = l.Uri,
-                        Active = l.Active
+                        Active = l.Active,
+                        CreateAt = l.CreateAt,
+                        UpdateAt = l.UpdateAt
                     })
                     .ToList()
             };

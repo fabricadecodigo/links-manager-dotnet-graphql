@@ -47,7 +47,10 @@ namespace LinkManager.Api.src.BusinessRules.Onboarding.Handlers
             await _sendWellcomeEmailHandler.ExecuteAsync(new SendEmailRequest
             {
                 Name = user.Name,
-                Email = user.Email
+                Email = user.Email,
+                Data = new {
+                    name = user.Name
+                }
             });
 
             return new CreateAccountResponse

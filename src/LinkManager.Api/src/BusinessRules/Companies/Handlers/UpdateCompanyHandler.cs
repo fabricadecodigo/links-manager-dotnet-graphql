@@ -15,7 +15,7 @@ namespace LinkManager.Api.src.BusinessRules.Companies.Handlers
 
         public async Task<UpdateCompanyResponse> ExecuteAsync(UpdateCompanyRequest request)
         {
-            var company = await _repository.GetByIdAsync(request.Id);
+            var company = await _repository.GetByUserIdAsync(request.UserId);
             if (company == null)
             {
                 throw new NotFoundException("Empresa não encontrada");
@@ -39,6 +39,8 @@ namespace LinkManager.Api.src.BusinessRules.Companies.Handlers
                     Id = company.Id,
                     Name = company.Name,
                     Slug = company.Slug,
+                    CreateAt = company.CreateAt,
+                    UpdateAt = company.UpdateAt
                 }
             };
         }
