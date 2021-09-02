@@ -15,7 +15,8 @@ namespace LinkManager.Api.src.BusinessRules.Links.Handlers
 
         public async Task<LinkListResponse> ExecuteAsync(GetLinkListRequest request)
         {
-            var query = _repository.GetQuery();
+            var query = _repository.GetQuery()
+                .Where(q => q.CompanyId == request.CompanyId);
 
             if (!string.IsNullOrEmpty(request.Title))
             {
