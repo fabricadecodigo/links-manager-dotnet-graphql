@@ -1,9 +1,11 @@
 using LinkManager.Domain.src.Entities;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System.Threading.Tasks;
 
 namespace LinkManager.Domain.src.Repositories
 {
-    public class CompanyRepository :  Repository<Company>, ICompanyRepository
+    public class CompanyRepository : Repository<Company>, ICompanyRepository
     {
         public CompanyRepository(DbContext db) : base(db)
         {
@@ -12,6 +14,16 @@ namespace LinkManager.Domain.src.Repositories
         public override IMongoCollection<Company> GetCollection()
         {
             return _db.Companies;
+        }
+
+        public async Task<Company> GetBySlugAsync(string slug)
+        {
+            var query = GetQuery()
+                .Where(q => q.Slug == slug);
+
+            var entity = await GetOneAsync(query);
+
+            return entity;
         }
     }
 }

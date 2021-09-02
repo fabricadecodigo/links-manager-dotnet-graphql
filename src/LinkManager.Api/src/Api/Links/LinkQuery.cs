@@ -26,5 +26,10 @@ namespace LinkManager.Api.src.Api.Links
             request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("companyId"));
             return await handler.ExecuteAsync(request);
         }
+
+        public async Task<LinkListResponse> GetLinksBySlug([Service] IGetLinkListByCompanySlugHandler handler, GetLinkLinkByCompanySlugRequest request)
+        {
+            return await handler.ExecuteAsync(request);
+        }
     }
 }
