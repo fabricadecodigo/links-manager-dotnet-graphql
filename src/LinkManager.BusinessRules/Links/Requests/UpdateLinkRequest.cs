@@ -1,3 +1,4 @@
+using HotChocolate;
 using System;
 
 namespace LinkManager.BusinessRules.Links.Requests
@@ -8,6 +9,7 @@ namespace LinkManager.BusinessRules.Links.Requests
         public string Title { get; set; }
         public string Uri { get; set; }
         public bool Active { get; set; }
+        [GraphQLIgnore]
         public Guid CompanyId { get; set; }
     }
 }
