@@ -1,8 +1,8 @@
 using HotChocolate;
 using HotChocolate.Types;
-using LinkManager.Api.src.BusinessRules.Authentication.Handlers;
-using LinkManager.Api.src.BusinessRules.Authentication.Requests;
-using LinkManager.Api.src.BusinessRules.Authentication.Responses;
+using LinkManager.BusinessRules.Authentication.Handlers;
+using LinkManager.BusinessRules.Authentication.Requests;
+using LinkManager.BusinessRules.Authentication.Responses;
 using System.Threading.Tasks;
 
 namespace LinkManager.Api.src.Api.Authentication

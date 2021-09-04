@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="6.0.3" />
-    <PackageReference Include="FluentValidation" Version="10.3.0" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="11.3.4" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="11.3.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.17" />
@@ -14,11 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LinkManager.Domain\LinkManager.Domain.csproj" />
+    <ProjectReference Include="..\LinkManager.BusinessRules\LinkManager.BusinessRules.csproj" />
     <ProjectReference Include="..\LinkManager.Helpers\LinkManager.Helpers.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <EmbeddedResource Include="$(ProjectDir)\src\BusinessRules\Emails\Templates\wellcome.html" />
-    <EmbeddedResource Include="$(ProjectDir)\src\BusinessRules\Emails\Templates\forgot-password.html" />
-  </ItemGroup>
+  </ItemGroup>  
 </Project>

@@ -1,6 +1,6 @@
 using HotChocolate.Types;
 using LinkManager.Api.src.Api;
-using LinkManager.Api.src.BusinessRules;
+using LinkManager.BusinessRules;
 using LinkManager.Domain.src.Extensions;
 using LinkManager.Helpers.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

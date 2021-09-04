@@ -4,4 +4,17 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LinkManager.Domain\LinkManager.Domain.csproj" />
+    <ProjectReference Include="..\LinkManager.Helpers\LinkManager.Helpers.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="$(ProjectDir)\Emails\Templates\wellcome.html" />
+    <EmbeddedResource Include="$(ProjectDir)\Emails\Templates\forgot-password.html" />
+  </ItemGroup>
 </Project>

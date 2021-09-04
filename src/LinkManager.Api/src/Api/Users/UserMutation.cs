@@ -1,9 +1,9 @@
 using HotChocolate;
 using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Types;
-using LinkManager.Api.src.BusinessRules.Users.Handlers;
-using LinkManager.Api.src.BusinessRules.Users.Requests;
-using LinkManager.Api.src.BusinessRules.Users.Responses;
+using LinkManager.BusinessRules.Users.Handlers;
+using LinkManager.BusinessRules.Users.Requests;
+using LinkManager.BusinessRules.Users.Responses;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -24,21 +24,6 @@ namespace LinkManager.Api.src.Api.Users
         public async Task<UserResponse> UpdateUserPassword([Service] IUpdatePasswordHandler handler, ClaimsPrincipal claimsPrincipal, UpdatePasswordRequest request)
         {
             request.Id = Guid.Parse(claimsPrincipal.FindFirstValue("id"));
-            return await handler.ExecuteAsync(request);
-        }
-
-        public async Task<ForgotPasswordResponse> ForgotPassword([Service] IForgotPassowordHandler handler, ForgotPasswordRequest request)
-        {
-            return await handler.ExecuteAsync(request);
-        }
-
-        public async Task<ForgotPasswordExpiredResponse> ForgotPasswordExpired([Service] IForgotPasswordExpiredHandler handler, ForgotPasswordExpiredRequest request)
-        {
-            return await handler.ExecuteAsync(request);
-        }
-
-        public async Task<ResetPasswordResponse> ResetPassword([Service] IResetPasswordHandler handler, ResetPasswordRequest request)
-        {
             return await handler.ExecuteAsync(request);
         }
     }

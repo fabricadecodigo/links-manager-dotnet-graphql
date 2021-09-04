@@ -1,9 +1,9 @@
 using HotChocolate;
 using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Types;
-using LinkManager.Api.src.BusinessRules.Links.Handlers;
-using LinkManager.Api.src.BusinessRules.Links.Requests;
-using LinkManager.Api.src.BusinessRules.Links.Responses;
+using LinkManager.BusinessRules.Links.Handlers;
+using LinkManager.BusinessRules.Links.Requests;
+using LinkManager.BusinessRules.Links.Responses;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;

@@ -1,8 +1,8 @@
 using HotChocolate;
 using HotChocolate.Types;
-using LinkManager.Api.src.BusinessRules.Onboarding.Handlers;
-using LinkManager.Api.src.BusinessRules.Onboarding.Requests;
-using LinkManager.Api.src.BusinessRules.Onboarding.Responses;
+using LinkManager.BusinessRules.Onboarding.Handlers;
+using LinkManager.BusinessRules.Onboarding.Requests;
+using LinkManager.BusinessRules.Onboarding.Responses;
 using System.Threading.Tasks;
 
 namespace LinkManager.Api.src.Api.Onboarding

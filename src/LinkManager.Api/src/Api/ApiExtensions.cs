@@ -1,4 +1,5 @@
 using HotChocolate.Execution.Configuration;
+using LinkManager.Api.src.Api.Account;
 using LinkManager.Api.src.Api.Authentication;
 using LinkManager.Api.src.Api.Companies;
 using LinkManager.Api.src.Api.Links;
@@ -14,12 +15,14 @@ namespace LinkManager.Api.src.Api
         {
             return services
                 .AddQueryType()
+                    .AddTypeExtension<AccountQuery>()
                     .AddTypeExtension<UserQuery>()
                     .AddTypeExtension<CompanyQuery>()
                     .AddTypeExtension<LinkQuery>()
                 .AddMutationType()
                     .AddTypeExtension<OnboardingMutation>()
                     .AddTypeExtension<AuthenticationMutation>()
+                    .AddTypeExtension<AccountMutation>()
                     .AddTypeExtension<UserMutation>()
                     .AddTypeExtension<CompanyMutation>()
                     .AddTypeExtension<LinkMutation>();
