@@ -1,10 +1,10 @@
-using System;
+using HotChocolate;
 
 namespace LinkManager.BusinessRules.Exceptions
 {
-    public class NotFoundException : Exception
+    public class NotFoundException : GraphQLException
     {
-        public NotFoundException(string message) : base(message)
+        public NotFoundException(string message) : base(ErrorBuilder.New().SetMessage(message).SetCode("NOT_FOUND_EXCEPTION").Build())
         {
         }
     }

@@ -8,7 +8,6 @@ using LinkManager.BusinessRules.Onboarding.Validators;
 using LinkManager.Domain.src.Entities;
 using LinkManager.Domain.src.Repositories;
 using LinkManager.Helpers.Crypt;
-using MongoDB.Driver.Linq;
 using System;
 using System.Threading.Tasks;
 
@@ -75,8 +74,7 @@ namespace LinkManager.BusinessRules.Onboarding.Handlers
         private async Task ValidateCompany(CreateAccountRequestCompany request)
         {
             // validar se já existe uma empresa com esse slug
-            var existsCompanyQuery = _companyRepository.GetQuery().Where(q => q.Slug == request.Slug);
-            var existsCompany = await _companyRepository.GetOneAsync(existsCompanyQuery);
+            var existsCompany = await _companyRepository.GetBySlugAsync(request.Slug);
             if (existsCompany != null)
             {
                 throw new ConflictException("O slug informado já está sendo usado.");
