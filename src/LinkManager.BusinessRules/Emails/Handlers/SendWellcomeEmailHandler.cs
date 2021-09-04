@@ -1,6 +1,5 @@
 using LinkManager.BusinessRules.Emails.Requests;
 using LinkManager.Helpers.Email;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace LinkManager.BusinessRules.Emails.Handlers
@@ -14,19 +13,11 @@ namespace LinkManager.BusinessRules.Emails.Handlers
         {
         }
 
-        public async Task ExecuteAsync(SendEmailRequest request)
+        public override async Task ExecuteAsync(SendEmailRequest request)
         {
-            var html = _emailTemplateHelper
-                .SetTemplateAssembly(Assembly.GetAssembly(typeof(SendEmailRequest)))
-                .SetTemplate(EmailTemplate.WELLCOME)
-                .SetData(request.Data)
-                .Build();
-
-            await _emailSenderHelper
-                .SetSubject("Bem vindo ao LinksManager")
-                .SetTo(request.Name, request.Email)
-                .SetHtml(html)
-                .SendMail();
+            request.Template = EmailTemplate.WELLCOME;
+            request.Subject = "Bem vindo ao LinksManager";
+            await base.ExecuteAsync(request);
         }
     }
 }

@@ -1,6 +1,6 @@
 using LinkManager.BusinessRules.Emails.Requests;
 using LinkManager.Helpers.Email;
-using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
 namespace LinkManager.BusinessRules.Emails.Handlers
@@ -13,19 +13,11 @@ namespace LinkManager.BusinessRules.Emails.Handlers
         {
         }
 
-        public async Task ExecuteAsync(SendEmailRequest request)
+        public override async Task ExecuteAsync(SendEmailRequest request)
         {
-            var html = _emailTemplateHelper
-                .SetTemplateAssembly(Assembly.GetAssembly(typeof(SendEmailRequest)))
-                .SetTemplate(EmailTemplate.FORGOT_PASSWORD)
-                .SetData(request.Data)
-                .Build();
-
-            await _emailSenderHelper
-                .SetSubject("Recuperar sua senha do LinksManager")
-                .SetTo(request.Name, request.Email)
-                .SetHtml(html)
-                .SendMail();
+            request.Template = EmailTemplate.FORGOT_PASSWORD;
+            request.Subject = "Recuperar sua senha do LinksManager";
+            await base.ExecuteAsync(request);
         }
     }
 }
