@@ -5,7 +5,7 @@ using LinkManager.BusinessRules.Authentication.Requests;
 using LinkManager.BusinessRules.Authentication.Responses;
 using System.Threading.Tasks;
 
-namespace LinkManager.Api.src.Api.Authentication
+namespace LinkManager.Api.Api.Authentication
 {
     [ExtendObjectType(OperationTypeNames.Mutation)]
     public class AuthenticationMutation

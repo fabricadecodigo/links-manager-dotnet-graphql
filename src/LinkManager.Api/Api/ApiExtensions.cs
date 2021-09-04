@@ -1,13 +1,13 @@
 using HotChocolate.Execution.Configuration;
-using LinkManager.Api.src.Api.Account;
-using LinkManager.Api.src.Api.Authentication;
-using LinkManager.Api.src.Api.Companies;
-using LinkManager.Api.src.Api.Links;
-using LinkManager.Api.src.Api.Onboarding;
-using LinkManager.Api.src.Api.Users;
+using LinkManager.Api.Api.Account;
+using LinkManager.Api.Api.Authentication;
+using LinkManager.Api.Api.Companies;
+using LinkManager.Api.Api.Links;
+using LinkManager.Api.Api.Onboarding;
+using LinkManager.Api.Api.Users;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LinkManager.Api.src.Api
+namespace LinkManager.Api.Api
 {
     public static class ApiExtensions
     {

@@ -5,7 +5,7 @@ using LinkManager.BusinessRules.Onboarding.Requests;
 using LinkManager.BusinessRules.Onboarding.Responses;
 using System.Threading.Tasks;
 
-namespace LinkManager.Api.src.Api.Onboarding
+namespace LinkManager.Api.Api.Onboarding
 {
 
     [ExtendObjectType(OperationTypeNames.Mutation)]

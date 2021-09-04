@@ -4,7 +4,7 @@ using LinkManager.BusinessRules.Account.Requests;
 using LinkManager.BusinessRules.Account.Responses;
 using System.Threading.Tasks;
 
-namespace LinkManager.Api.src.Api.Account
+namespace LinkManager.Api.Api.Account
 {
     public class AccountMutation
     {

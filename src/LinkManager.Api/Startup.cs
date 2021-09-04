@@ -1,5 +1,5 @@
 using HotChocolate.Types;
-using LinkManager.Api.src.Api;
+using LinkManager.Api.Api;
 using LinkManager.BusinessRules;
 using LinkManager.Domain.src.Extensions;
 using LinkManager.Helpers.Extensions;

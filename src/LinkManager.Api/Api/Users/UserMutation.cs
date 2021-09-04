@@ -8,7 +8,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace LinkManager.Api.src.Api.Users
+namespace LinkManager.Api.Api.Users
 {
     [ExtendObjectType(OperationTypeNames.Mutation)]
     public class UserMutation

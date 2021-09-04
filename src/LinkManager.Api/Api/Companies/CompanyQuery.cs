@@ -8,7 +8,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace LinkManager.Api.src.Api.Companies
+namespace LinkManager.Api.Api.Companies
 {
     [ExtendObjectType(OperationTypeNames.Query)]
     public class CompanyQuery
