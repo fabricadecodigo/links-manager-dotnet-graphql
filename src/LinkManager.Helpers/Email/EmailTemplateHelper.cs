@@ -13,18 +13,25 @@ namespace LinkManager.Helpers.Email
             [EmailTemplate.FORGOT_PASSWORD] = "forgot-password"
         };
 
+        private Assembly TemplateAssembly;
         private EmailTemplate Identifier { get; set; }
         private object Data { get; set; }
 
+        public IEmailTemplateHelper SetTemplateAssembly(Assembly assembly)
+        {
+            TemplateAssembly = assembly;
+            return this;
+        }
+
         public IEmailTemplateHelper SetTemplate(EmailTemplate identifier)
         {
-            Identifier = identifier;
+            this.Identifier = identifier;
             return this;
         }
 
         public IEmailTemplateHelper SetData(object data)
         {
-            Data = data;
+            this.Data = data;
             return this;
         }
 
@@ -40,8 +47,8 @@ namespace LinkManager.Helpers.Email
         {
             var templateName = GetTemplateName(identifier);
             var templateFullName = $"LinkManager.BusinessRules.Emails.Templates.{templateName}.html";
-
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(templateFullName))
+            
+            using (var stream = TemplateAssembly.GetManifestResourceStream(templateFullName))
             {
                 using (var reader = new StreamReader(stream))
                 {

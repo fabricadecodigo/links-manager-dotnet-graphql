@@ -1,5 +1,6 @@
 using LinkManager.BusinessRules.Emails.Requests;
 using LinkManager.Helpers.Email;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace LinkManager.BusinessRules.Emails.Handlers
@@ -16,6 +17,7 @@ namespace LinkManager.BusinessRules.Emails.Handlers
         public async Task ExecuteAsync(SendEmailRequest request)
         {
             var html = _emailTemplateHelper
+                .SetTemplateAssembly(Assembly.GetAssembly(typeof(SendEmailRequest)))
                 .SetTemplate(EmailTemplate.WELLCOME)
                 .SetData(request.Data)
                 .Build();
