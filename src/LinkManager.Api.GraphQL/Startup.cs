@@ -45,21 +45,24 @@ namespace LinkManager.Api.GraphQL
                 });
 
             services
+                .AddMongoDbClient(Configuration)
+                .AddMongoDbContext(Configuration);
+
+            services
+                // esse método só aparece no package
+                // AutoMapper.Extensions.Microsoft.DependencyInjection
+                .AddAutoMapper(typeof(Startup))
+                .AddHttpClient()
+                .AddHelpers()
+                .AddBusinessRules();
+
+            services
                 .AddGraphQLServer()
                 .AddAuthorization()
                 // ajustando o formatodo tipo Guid para 00000000-0000-0000-0000-000000000000
                 // https://chillicream.com/docs/hotchocolate/defining-a-schema/scalars/#net-scalars
                 .AddType(new UuidType('D'))
                 .AddQueriesAndMutations();
-
-            services
-                .AddMongoDbClient(Configuration)
-                .AddMongoDbContext(Configuration);
-
-            services
-                .AddHttpClient()
-                .AddHelpers()
-                .AddBusinessRules();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
