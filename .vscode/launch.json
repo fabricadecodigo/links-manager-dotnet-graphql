@@ -9,9 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/LinkManager.Api/bin/Debug/netcoreapp3.1/LinkManager.Api.dll",
+            "program": "${workspaceFolder}/src/LinkManager.Api.GraphQL/bin/Debug/netcoreapp3.1/LinkManager.Api.GraphQL.dll",
             "args": ["--urls","http://localhost:5000"],
-            "cwd": "${workspaceFolder}/src/LinkManager.Api",
+            "cwd": "${workspaceFolder}/src/LinkManager.Api.GraphQL",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",

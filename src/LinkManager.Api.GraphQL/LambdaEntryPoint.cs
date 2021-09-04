@@ -3,7 +3,7 @@ using Amazon.Lambda.Core;
 using Microsoft.AspNetCore.Hosting;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
-namespace LinkManager.Api
+namespace LinkManager.Api.GraphQL
 {
     public class LambdaEntryPoint : APIGatewayProxyFunction
     {

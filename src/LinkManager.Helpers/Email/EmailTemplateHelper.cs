@@ -39,7 +39,7 @@ namespace LinkManager.Helpers.Email
         private string GetEmailTempalte(EmailTemplate identifier)
         {
             var templateName = GetTemplateName(identifier);
-            var templateFullName = $"LinkManager.Api.src.BusinessRules.Emails.Templates.{templateName}.html";
+            var templateFullName = $"LinkManager.BusinessRules.Emails.Templates.{templateName}.html";
 
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(templateFullName))
             {

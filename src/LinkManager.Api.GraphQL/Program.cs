@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace LinkManager.Api
+namespace LinkManager.Api.GraphQL
 {
     public class Program
     {

@@ -8,29 +8,27 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace LinkManager.Api.Api.Links
+namespace LinkManager.Api.GraphQL.Api.Links
 {
-    [ExtendObjectType(OperationTypeNames.Mutation)]
-    public class LinkMutation
+    [ExtendObjectType(OperationTypeNames.Query)]
+    public class LinkQuery
     {
         [Authorize]
-        public async Task<LinkResponse> CreateLink([Service] ICreateLinkHandler handler, ClaimsPrincipal claimsPrincipal, CreateLinkRequest request)
+        public async Task<LinkResponse> GetLink([Service] IGetLinkByIdHandler handler, ClaimsPrincipal claimsPrincipal, GetLinkByIdRequest request)
         {
             request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
             return await handler.ExecuteAsync(request);
         }
 
         [Authorize]
-        public async Task<LinkResponse> UpdateLink([Service] IUpdateLinkHandler handler, ClaimsPrincipal claimsPrincipal, UpdateLinkRequest request)
+        public async Task<LinkListResponse> GetLinks([Service] IGetLinkListHandler handler, ClaimsPrincipal claimsPrincipal, GetLinkListRequest request)
         {
             request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
             return await handler.ExecuteAsync(request);
         }
 
-        [Authorize]
-        public async Task<DeleteLinkResponse> DeleteLink([Service] IDeleteLinkHandler handler, ClaimsPrincipal claimsPrincipal, DeleteLinkRequest request)
+        public async Task<LinkListResponse> GetLinksBySlug([Service] IGetLinkListByCompanySlugHandler handler, GetLinkLinkByCompanySlugRequest request)
         {
-            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
             return await handler.ExecuteAsync(request);
         }
     }

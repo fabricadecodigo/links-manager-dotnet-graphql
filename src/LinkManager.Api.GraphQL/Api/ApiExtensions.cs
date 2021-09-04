@@ -1,13 +1,13 @@
 using HotChocolate.Execution.Configuration;
-using LinkManager.Api.Api.Account;
-using LinkManager.Api.Api.Authentication;
-using LinkManager.Api.Api.Companies;
-using LinkManager.Api.Api.Links;
-using LinkManager.Api.Api.Onboarding;
-using LinkManager.Api.Api.Users;
+using LinkManager.Api.GraphQL.Api.Account;
+using LinkManager.Api.GraphQL.Api.Authentication;
+using LinkManager.Api.GraphQL.Api.Companies;
+using LinkManager.Api.GraphQL.Api.Links;
+using LinkManager.Api.GraphQL.Api.Onboarding;
+using LinkManager.Api.GraphQL.Api.Users;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LinkManager.Api.Api
+namespace LinkManager.Api.GraphQL.Api
 {
     public static class ApiExtensions
     {

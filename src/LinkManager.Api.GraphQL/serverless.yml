@@ -14,7 +14,7 @@ package:
 
 functions:
   handler:
-    handler: LinkManager.Api::LinkManager.Api.LambdaEntryPoint::FunctionHandlerAsync
+    handler: LinkManager.Api.GraphQL::LinkManager.Api.GraphQL.LambdaEntryPoint::FunctionHandlerAsync
     events:
       - http:
           path: /{proxy+}

@@ -1,5 +1,5 @@
 using HotChocolate.Types;
-using LinkManager.Api.Api;
+using LinkManager.Api.GraphQL.Api;
 using LinkManager.BusinessRules;
 using LinkManager.Domain.src.Extensions;
 using LinkManager.Helpers.Extensions;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace LinkManager.Api
+namespace LinkManager.Api.GraphQL
 {
     public class Startup
     {

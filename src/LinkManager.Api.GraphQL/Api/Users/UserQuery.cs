@@ -8,7 +8,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace LinkManager.Api.Api.Users
+namespace LinkManager.Api.GraphQL.Api.Users
 {
     [ExtendObjectType(OperationTypeNames.Query)]
     public class UserQuery
