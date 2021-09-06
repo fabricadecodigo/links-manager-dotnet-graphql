@@ -1,5 +1,8 @@
 using LinkManager.Domain.src.Entities;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System;
+using System.Threading.Tasks;
 
 namespace LinkManager.Domain.src.Repositories
 {
@@ -12,6 +15,18 @@ namespace LinkManager.Domain.src.Repositories
         public override IMongoCollection<Link> GetCollection()
         {
             return _db.Links;
+        }
+
+        public async Task<Link> GetByCompanyIdAsync(Guid id, Guid companyId)
+        {
+            var linkQuery = GetQuery()
+                .Where(q =>
+                    q.Id == id
+                    && q.CompanyId == companyId
+                );
+
+            var link = await GetOneAsync(linkQuery);
+            return link;
         }
     }
 }

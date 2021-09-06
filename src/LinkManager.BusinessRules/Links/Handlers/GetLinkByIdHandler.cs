@@ -17,12 +17,7 @@ namespace LinkManager.BusinessRules.Links.Handlers
 
         public async Task<LinkResponse> ExecuteAsync(GetLinkByIdRequest request)
         {
-            var linkQuery = _repository.GetQuery()
-                .Where(q =>
-                    q.CompanyId == request.CompanyId
-                    && q.Id == request.Id
-                );
-            var link = await _repository.GetOneAsync(linkQuery);
+            var link = await _repository.GetByCompanyIdAsync(request.Id, request.CompanyId);
             if (link == null)
             {
                 throw new NotFoundException("Link não encontrado");

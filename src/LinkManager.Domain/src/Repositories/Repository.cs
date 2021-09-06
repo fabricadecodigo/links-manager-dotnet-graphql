@@ -22,13 +22,7 @@ namespace LinkManager.Domain.src.Repositories
         {
             var entities = await query.ToListAsync();
             return entities;
-        }
-
-        public async Task<TEntity> GetOneAsync(IMongoQueryable<TEntity> query)
-        {
-            var entity = await query.SingleOrDefaultAsync();
-            return entity;
-        }
+        }        
 
         public async Task<bool> ExistsAsync(IMongoQueryable<TEntity> query)
         {
@@ -68,6 +62,12 @@ namespace LinkManager.Domain.src.Repositories
         {
             await GetCollection()
                 .DeleteOneAsync(filter => filter.Id == id);
+        }
+        
+        protected async Task<TEntity> GetOneAsync(IMongoQueryable<TEntity> query)
+        {
+            var entity = await query.SingleOrDefaultAsync();
+            return entity;
         }
     }
 }
