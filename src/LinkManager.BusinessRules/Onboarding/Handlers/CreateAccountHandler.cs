@@ -1,4 +1,3 @@
-using FluentValidation;
 using LinkManager.BusinessRules.Emails.Handlers;
 using LinkManager.BusinessRules.Emails.Requests;
 using LinkManager.BusinessRules.Exceptions;
@@ -15,28 +14,34 @@ namespace LinkManager.BusinessRules.Onboarding.Handlers
 {
     public class CreateAccountHandler : ICreateAccountHandler
     {
+        private readonly ICryptHelper _cryptHelper;
         private readonly IUserRepository _userRepository;
         private readonly ICompanyRepository _companyRepository;
-        private readonly ICryptHelper _cryptHelper;
+        private readonly ICreateUserValidator _createUserValidator;
+        private readonly ICreateCompanyValidator _createCompanyValidator;
         private readonly ISendWellcomeEmailHandler _sendWellcomeEmailHandler;
 
         public CreateAccountHandler(
+            ICryptHelper cryptHelper,
             IUserRepository userRepository,
             ICompanyRepository companyRepository,
-            ICryptHelper cryptHelper,
+            ICreateUserValidator createUserValidator,
+            ICreateCompanyValidator createCompanyValidator,
             ISendWellcomeEmailHandler sendWellcomeMailHandler
         )
         {
+            _cryptHelper = cryptHelper;
             _userRepository = userRepository;
             _companyRepository = companyRepository;
-            _cryptHelper = cryptHelper;
+            _createUserValidator = createUserValidator;
+            _createCompanyValidator = createCompanyValidator;
             _sendWellcomeEmailHandler = sendWellcomeMailHandler;
         }
 
         public async Task<CreateAccountResponse> ExecuteAsync(CreateAccountRequest request)
         {
-            await ValidateUser(request.User);
-            await ValidateCompany(request.Company);
+            ValidateUser(request.User);
+            ValidateCompany(request.Company);
 
             var user = await CreateUser(request.User);
             await CreateCompany(request.Company, user.Id);
@@ -58,26 +63,21 @@ namespace LinkManager.BusinessRules.Onboarding.Handlers
             };
         }
 
-        private async Task ValidateUser(CreateAccountRequestUser request)
+        private void ValidateUser(CreateAccountRequestUser request)
         {
-            // // Validação
-            new CreateUserValidator().ValidateAndThrow(request);
-
-            // validar se já existe um usuário
-            var existsUsers = await _userRepository.GetByEmailAsync(request.Email);
-            if (existsUsers != null)
+            var validationResult = _createUserValidator.Validate(request);
+            if (!validationResult.IsValid)
             {
-                throw new ConflictException("O email informado já está sendo usado.");
+                throw new ValidationException("Erro ao criar um usuário", validationResult.Errors);
             }
         }
 
-        private async Task ValidateCompany(CreateAccountRequestCompany request)
+        private void ValidateCompany(CreateAccountRequestCompany request)
         {
-            // validar se já existe uma empresa com esse slug
-            var existsCompany = await _companyRepository.GetBySlugAsync(request.Slug);
-            if (existsCompany != null)
+            var validationResult = _createCompanyValidator.Validate(request);
+            if (!validationResult.IsValid)
             {
-                throw new ConflictException("O slug informado já está sendo usado.");
+                throw new ValidationException("Erro ao criar a empresa", validationResult.Errors);
             }
         }
 

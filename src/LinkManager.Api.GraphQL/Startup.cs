@@ -1,6 +1,6 @@
 using HotChocolate.Types;
 using LinkManager.Api.GraphQL.Api;
-using LinkManager.BusinessRules;
+using LinkManager.BusinessRules.Extensions;
 using LinkManager.Domain.Extensions;
 using LinkManager.Helpers.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -51,7 +51,8 @@ namespace LinkManager.Api.GraphQL
             services
                 .AddHttpClient()
                 .AddHelpers()
-                .AddBusinessRules();
+                .AddBusinessRules()
+                .AddBusinessRulesValidadors();
 
             services
                 .AddGraphQLServer()

@@ -1,10 +1,10 @@
+using LinkManager.Helpers.Crypt;
+using LinkManager.Helpers.Email;
+using LinkManager.Helpers.Jwt;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace LinkManager.Helpers.Extensions
 {
-    using LinkManager.Helpers.Crypt;
-    using LinkManager.Helpers.Email;
-    using LinkManager.Helpers.Jwt;
-    using Microsoft.Extensions.DependencyInjection;
-
     public static class HelpersExtensions
     {
         public static IServiceCollection AddHelpers(this IServiceCollection services)

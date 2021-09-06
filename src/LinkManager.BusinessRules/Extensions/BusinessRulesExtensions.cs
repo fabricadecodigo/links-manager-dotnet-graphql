@@ -7,7 +7,7 @@ using LinkManager.BusinessRules.Onboarding.Handlers;
 using LinkManager.BusinessRules.Users.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LinkManager.BusinessRules
+namespace LinkManager.BusinessRules.Extensions
 {
     public static class BusinessRulesExtensions
     {
