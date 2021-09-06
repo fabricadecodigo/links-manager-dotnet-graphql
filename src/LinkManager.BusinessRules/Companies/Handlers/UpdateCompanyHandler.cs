@@ -1,5 +1,6 @@
 using LinkManager.BusinessRules.Companies.Requests;
 using LinkManager.BusinessRules.Companies.Responses;
+using LinkManager.BusinessRules.Companies.Validators;
 using LinkManager.BusinessRules.Exceptions;
 using LinkManager.Domain.Repositories;
 using System;
@@ -10,11 +11,25 @@ namespace LinkManager.BusinessRules.Companies.Handlers
     public class UpdateCompanyHandler : IUpdateCompanyHandler
     {
         private readonly ICompanyRepository _repository;
+        private readonly IUpdateCompanyValidator _updateCompanyValidator;
 
-        public UpdateCompanyHandler(ICompanyRepository repository) => _repository = repository;
+        public UpdateCompanyHandler(
+            ICompanyRepository repository,
+            IUpdateCompanyValidator updateCompanyValidator
+        )
+        {
+            _repository = repository;
+            _updateCompanyValidator = updateCompanyValidator;
+        }
 
         public async Task<UpdateCompanyResponse> ExecuteAsync(UpdateCompanyRequest request)
         {
+            var validationResult = _updateCompanyValidator.Validate(request);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException("Erro ao alterar a empresa", validationResult.Errors);
+            }
+
             var company = await _repository.GetByUserIdAsync(request.UserId);
             if (company == null)
             {

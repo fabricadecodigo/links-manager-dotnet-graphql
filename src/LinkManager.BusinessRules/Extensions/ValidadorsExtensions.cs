@@ -1,3 +1,5 @@
+using LinkManager.BusinessRules.Account.Validators;
+using LinkManager.BusinessRules.Companies.Validators;
 using LinkManager.BusinessRules.Onboarding.Validators;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +11,9 @@ namespace LinkManager.BusinessRules.Extensions
         {
             return services
                 .AddScoped<ICreateUserValidator, CreateUserValidator>()
-                .AddScoped<ICreateCompanyValidator, CreateCompanyValidator>();
+                .AddScoped<ICreateCompanyValidator, CreateCompanyValidator>()
+                .AddScoped<IResetPasswordValidator, ResetPasswordValidator>()
+                .AddScoped<IUpdateCompanyValidator, UpdateCompanyValidator>();
         }
     }
 }
