@@ -49,9 +49,6 @@ namespace LinkManager.Api.GraphQL
                 .AddMongoDbContext(Configuration);
 
             services
-                // esse método só aparece no package
-                // AutoMapper.Extensions.Microsoft.DependencyInjection
-                .AddAutoMapper(typeof(Startup))
                 .AddHttpClient()
                 .AddHelpers()
                 .AddBusinessRules();
