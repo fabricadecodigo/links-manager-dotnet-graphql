@@ -1,6 +1,6 @@
 using System;
 
-namespace LinkManager.Domain.src.Entities
+namespace LinkManager.Domain.Entities
 {
     public class ForgotPassword : Entity
     {

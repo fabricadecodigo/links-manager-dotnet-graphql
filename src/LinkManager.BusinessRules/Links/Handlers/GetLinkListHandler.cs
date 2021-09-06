@@ -1,6 +1,6 @@
 using LinkManager.BusinessRules.Links.Requests;
 using LinkManager.BusinessRules.Links.Responses;
-using LinkManager.Domain.src.Repositories;
+using LinkManager.Domain.Repositories;
 using MongoDB.Driver.Linq;
 using System.Linq;
 using System.Threading.Tasks;

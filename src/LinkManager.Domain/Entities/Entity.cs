@@ -2,7 +2,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 
-namespace LinkManager.Domain.src.Entities
+namespace LinkManager.Domain.Entities
 {
     public abstract class Entity
     {

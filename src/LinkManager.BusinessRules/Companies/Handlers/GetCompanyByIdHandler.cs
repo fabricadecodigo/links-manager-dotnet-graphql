@@ -1,7 +1,7 @@
 using LinkManager.BusinessRules.Companies.Requests;
 using LinkManager.BusinessRules.Companies.Responses;
 using LinkManager.BusinessRules.Exceptions;
-using LinkManager.Domain.src.Repositories;
+using LinkManager.Domain.Repositories;
 using System.Threading.Tasks;
 
 namespace LinkManager.BusinessRules.Companies.Handlers

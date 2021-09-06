@@ -2,8 +2,8 @@
 using LinkManager.BusinessRules.Authentication.Requests;
 using LinkManager.BusinessRules.Authentication.Responses;
 using LinkManager.BusinessRules.Exceptions;
-using LinkManager.Domain.src.Entities;
-using LinkManager.Domain.src.Repositories;
+using LinkManager.Domain.Entities;
+using LinkManager.Domain.Repositories;
 using LinkManager.Helpers.Crypt;
 using LinkManager.Helpers.Jwt;
 using System.Security.Claims;

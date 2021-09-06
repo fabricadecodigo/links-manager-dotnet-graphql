@@ -1,9 +1,9 @@
-using LinkManager.Domain.src.Repositories;
+using LinkManager.Domain.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 
-namespace LinkManager.Domain.src.Extensions
+namespace LinkManager.Domain.Extensions
 {
     public static class DbContextExtensions
     {

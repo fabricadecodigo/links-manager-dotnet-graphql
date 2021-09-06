@@ -1,7 +1,7 @@
 using LinkManager.BusinessRules.Links.Requests;
 using LinkManager.BusinessRules.Links.Responses;
-using LinkManager.Domain.src.Entities;
-using LinkManager.Domain.src.Repositories;
+using LinkManager.Domain.Entities;
+using LinkManager.Domain.Repositories;
 using System;
 using System.Threading.Tasks;
 

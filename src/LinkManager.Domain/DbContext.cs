@@ -1,7 +1,7 @@
-using LinkManager.Domain.src.Entities;
+using LinkManager.Domain.Entities;
 using MongoDB.Driver;
 
-namespace LinkManager.Domain.src
+namespace LinkManager.Domain
 {
     public class DbContext
     {

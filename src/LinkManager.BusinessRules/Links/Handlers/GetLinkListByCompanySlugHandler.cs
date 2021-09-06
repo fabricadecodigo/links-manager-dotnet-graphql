@@ -1,4 +1,4 @@
-using LinkManager.Domain.src.Repositories;
+using LinkManager.Domain.Repositories;
 
 namespace LinkManager.BusinessRules.Links.Handlers
 {

@@ -1,7 +1,7 @@
 using LinkManager.BusinessRules.Exceptions;
 using LinkManager.BusinessRules.Account.Requests;
 using LinkManager.BusinessRules.Account.Responses;
-using LinkManager.Domain.src.Repositories;
+using LinkManager.Domain.Repositories;
 using LinkManager.Helpers.Crypt;
 using System.Threading.Tasks;
 

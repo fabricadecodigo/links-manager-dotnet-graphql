@@ -1,7 +1,7 @@
-using LinkManager.Domain.src.Entities;
+using LinkManager.Domain.Entities;
 using System.Threading.Tasks;
 
-namespace LinkManager.Domain.src.Repositories
+namespace LinkManager.Domain.Repositories
 {
     public interface IForgotPasswordRepository : IRepository<ForgotPassword>
     {

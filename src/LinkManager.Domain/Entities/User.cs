@@ -1,4 +1,4 @@
-namespace LinkManager.Domain.src.Entities
+namespace LinkManager.Domain.Entities
 {
     public class User : Entity
     {

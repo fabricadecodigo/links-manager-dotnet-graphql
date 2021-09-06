@@ -1,11 +1,11 @@
-using LinkManager.Domain.src.Entities;
+using LinkManager.Domain.Entities;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LinkManager.Domain.src.Repositories
+namespace LinkManager.Domain.Repositories
 {
     public abstract class Repository<TEntity> : IRepository<TEntity>
         where TEntity : Entity

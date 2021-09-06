@@ -1,10 +1,10 @@
-using LinkManager.Domain.src.Entities;
+using LinkManager.Domain.Entities;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
 using System.Threading.Tasks;
 
-namespace LinkManager.Domain.src.Repositories
+namespace LinkManager.Domain.Repositories
 {
     public class LinkRepository : Repository<Link>, ILinkRepository
     {

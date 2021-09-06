@@ -7,7 +7,7 @@ using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Driver;
 using System;
 
-namespace LinkManager.Domain.src.Extensions
+namespace LinkManager.Domain.Extensions
 {
     public static class MongoClientExtensions
     {

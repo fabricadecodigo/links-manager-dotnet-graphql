@@ -1,7 +1,7 @@
 using HotChocolate.Types;
 using LinkManager.Api.GraphQL.Api;
 using LinkManager.BusinessRules;
-using LinkManager.Domain.src.Extensions;
+using LinkManager.Domain.Extensions;
 using LinkManager.Helpers.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
