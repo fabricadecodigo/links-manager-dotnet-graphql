@@ -27,6 +27,7 @@ namespace LinkManager.Api.GraphQL
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddAutoMapper(typeof(Startup))
                 .AddAuthorization()
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -50,6 +51,7 @@ namespace LinkManager.Api.GraphQL
 
             services
                 .AddHttpClient()
+                .AddDomainValidators()
                 .AddHelpers()
                 .AddBusinessRules()
                 .AddBusinessRulesValidadors();

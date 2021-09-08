@@ -1,7 +1,10 @@
+using AutoMapper;
+using LinkManager.BusinessRules.Exceptions;
 using LinkManager.BusinessRules.Links.Requests;
 using LinkManager.BusinessRules.Links.Responses;
 using LinkManager.Domain.Entities;
 using LinkManager.Domain.Repositories;
+using LinkManager.Domain.Validators;
 using System;
 using System.Threading.Tasks;
 
@@ -9,31 +12,35 @@ namespace LinkManager.BusinessRules.Links.Handlers
 {
     public class CreateLinkHandler : ICreateLinkHandler
     {
+        private readonly IMapper _mapper;
         private readonly ILinkRepository _repository;
+        private readonly ILinkValidator _linkValidator;
 
-        public CreateLinkHandler(ILinkRepository repository) => _repository = repository;
+        public CreateLinkHandler(
+            IMapper mapper,
+            ILinkRepository repository,
+            ILinkValidator linkValidator
+        )
+        {
+            _mapper = mapper;
+            _repository = repository;
+            _linkValidator = linkValidator;
+        }
 
         public async Task<LinkResponse> ExecuteAsync(CreateLinkRequest request)
         {
-            var link = await _repository.CreateAsync(new Link
+            var link = _mapper.Map<Link>(request);
+            var validationResult = _linkValidator.Validate(link);
+            if (!validationResult.IsValid)
             {
-                Title = request.Title,
-                Uri = request.Uri,
-                Active = request.Active,
-                CompanyId = request.CompanyId,
-                CreateAt = DateTime.Now,
-            });
+                throw new ValidationException("Erro ao criar um link", validationResult.Errors);
+            }
+
+            await _repository.CreateAsync(link);
 
             return new LinkResponse
             {
-                Payload = new LinkResponseItem
-                {
-                    Id = link.Id,
-                    Title = link.Title,
-                    Uri = link.Uri,
-                    Active = link.Active,
-                    CreateAt = link.CreateAt
-                }
+                Payload = _mapper.Map<LinkResponseItem>(link)
             };
 
         }

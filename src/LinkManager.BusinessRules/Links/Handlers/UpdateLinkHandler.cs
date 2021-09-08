@@ -1,9 +1,10 @@
+using AutoMapper;
 using LinkManager.BusinessRules.Exceptions;
 using LinkManager.BusinessRules.Links.Requests;
 using LinkManager.BusinessRules.Links.Responses;
 using LinkManager.Domain.Entities;
 using LinkManager.Domain.Repositories;
-using MongoDB.Driver.Linq;
+using LinkManager.Domain.Validators;
 using System;
 using System.Threading.Tasks;
 
@@ -11,9 +12,20 @@ namespace LinkManager.BusinessRules.Links.Handlers
 {
     public class UpdateLinkHandler : IUpdateLinkHandler
     {
+        private readonly IMapper _mapper;
         private readonly ILinkRepository _repository;
+        private readonly ILinkValidator _linkValidator;
 
-        public UpdateLinkHandler(ILinkRepository repository) => _repository = repository;
+        public UpdateLinkHandler(
+            IMapper mapper,
+            ILinkRepository repository,
+            ILinkValidator linkValidator
+        )
+        {
+            _mapper = mapper;
+            _repository = repository;
+            _linkValidator = linkValidator;
+        }
 
         public async Task<LinkResponse> ExecuteAsync(UpdateLinkRequest request)
         {
@@ -23,24 +35,18 @@ namespace LinkManager.BusinessRules.Links.Handlers
                 throw new NotFoundException("Link não encontrado");
             }
 
-            link.Title = request.Title;
-            link.Uri = request.Uri;
-            link.Active = request.Active;
-            link.UpdateAt = DateTime.Now;
+            link = _mapper.Map<Link>(request);
+            var validationResult = _linkValidator.Validate(link);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException("Erro ao alterar um link", validationResult.Errors);
+            }
 
             link = await _repository.UpdateAsync(link.Id, link);
 
             return new LinkResponse
             {
-                Payload = new LinkResponseItem
-                {
-                    Id = link.Id,
-                    Title = link.Title,
-                    Uri = link.Uri,
-                    Active = link.Active,
-                    CreateAt = link.CreateAt,
-                    UpdateAt = link.UpdateAt
-                }
+                Payload = _mapper.Map<LinkResponseItem>(link)
             };
         }
     }

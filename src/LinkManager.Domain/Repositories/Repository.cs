@@ -22,7 +22,7 @@ namespace LinkManager.Domain.Repositories
         {
             var entities = await query.ToListAsync();
             return entities;
-        }        
+        }
 
         public async Task<bool> ExistsAsync(IMongoQueryable<TEntity> query)
         {
@@ -41,6 +41,8 @@ namespace LinkManager.Domain.Repositories
 
         public async Task<TEntity> CreateAsync(TEntity entity)
         {
+            entity.CreateAt = DateTime.Now;
+
             await GetCollection()
                 .InsertOneAsync(entity);
 
@@ -49,6 +51,8 @@ namespace LinkManager.Domain.Repositories
 
         public async Task<TEntity> UpdateAsync(Guid id, TEntity entity)
         {
+            entity.UpdateAt = DateTime.Now;
+
             await GetCollection()
                 .ReplaceOneAsync(
                     filter => filter.Id == id,
@@ -63,7 +67,7 @@ namespace LinkManager.Domain.Repositories
             await GetCollection()
                 .DeleteOneAsync(filter => filter.Id == id);
         }
-        
+
         protected async Task<TEntity> GetOneAsync(IMongoQueryable<TEntity> query)
         {
             var entity = await query.SingleOrDefaultAsync();
