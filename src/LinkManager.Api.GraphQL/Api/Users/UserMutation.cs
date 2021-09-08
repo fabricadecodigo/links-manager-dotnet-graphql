@@ -13,6 +13,11 @@ namespace LinkManager.Api.GraphQL.Api.Users
     [ExtendObjectType(OperationTypeNames.Mutation)]
     public class UserMutation
     {
+        public async Task<UserResponse> CreateUser([Service] ICreateUserHandler handler, ClaimsPrincipal claimsPrincipal, CreateUserRequest request)
+        {
+            return await handler.ExecuteAsync(request);
+        }
+
         [Authorize]
         public async Task<UserResponse> UpdateUser([Service] IUpdateUserHandler handler, ClaimsPrincipal claimsPrincipal, UpdateUserRequest request)
         {

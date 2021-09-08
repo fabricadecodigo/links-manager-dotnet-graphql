@@ -3,7 +3,6 @@ using LinkManager.BusinessRules.Authentication.Handlers;
 using LinkManager.BusinessRules.Companies.Handlers;
 using LinkManager.BusinessRules.Emails.Handlers;
 using LinkManager.BusinessRules.Links.Handlers;
-using LinkManager.BusinessRules.Onboarding.Handlers;
 using LinkManager.BusinessRules.Users.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,9 +16,8 @@ namespace LinkManager.BusinessRules.Extensions
                 // Emails
                 .AddScoped<ISendWellcomeEmailHandler, SendWellcomeEmailHandler>()
                 .AddScoped<ISendForgotPasswordEmailHandler, SendForgotPasswordEmailHandler>()
-                
+
                 // account
-                .AddScoped<ICreateAccountHandler, CreateAccountHandler>()
                 .AddScoped<IForgotPassowordHandler, ForgotPassowordHandler>()
                 .AddScoped<IForgotPasswordExpiredHandler, ForgotPasswordExpiredHandler>()
                 .AddScoped<IResetPasswordHandler, ResetPasswordHandler>()

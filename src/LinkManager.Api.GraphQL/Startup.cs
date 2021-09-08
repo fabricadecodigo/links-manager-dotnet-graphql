@@ -47,14 +47,11 @@ namespace LinkManager.Api.GraphQL
 
             services
                 .AddMongoDbClient(Configuration)
-                .AddMongoDbContext(Configuration);
-
-            services
+                .AddMongoDbContext(Configuration)
                 .AddHttpClient()
                 .AddDomainValidators()
                 .AddHelpers()
-                .AddBusinessRules()
-                .AddBusinessRulesValidadors();
+                .AddBusinessRules();
 
             services
                 .AddGraphQLServer()

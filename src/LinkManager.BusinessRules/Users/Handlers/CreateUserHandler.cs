@@ -1,4 +1,6 @@
 using AutoMapper;
+using LinkManager.BusinessRules.Emails.Handlers;
+using LinkManager.BusinessRules.Emails.Requests;
 using LinkManager.BusinessRules.Exceptions;
 using LinkManager.BusinessRules.Users.Requests;
 using LinkManager.BusinessRules.Users.Responses;
@@ -16,18 +18,21 @@ namespace LinkManager.BusinessRules.Users.Handlers
         private readonly ICryptHelper _cryptHelper;
         private readonly IUserRepository _userRepository;
         private readonly IUserValidator _userValidator;
+        private readonly ISendWellcomeEmailHandler _sendWellcomeEmailHandler;
 
         public CreateUserHandler(
             IMapper mapper,
             ICryptHelper cryptHelper,
             IUserRepository userRepository,
-            IUserValidator userValidator
+            IUserValidator userValidator,
+            ISendWellcomeEmailHandler sendWellcomeMailHandler
         )
         {
             _mapper = mapper;
             _cryptHelper = cryptHelper;
             _userRepository = userRepository;
             _userValidator = userValidator;
+            _sendWellcomeEmailHandler = sendWellcomeMailHandler;
         }
 
         public async Task<UserResponse> ExecuteAsync(CreateUserRequest request)
@@ -41,6 +46,17 @@ namespace LinkManager.BusinessRules.Users.Handlers
 
             request.Password = _cryptHelper.Encrypt(request.Password);
             user = await _userRepository.CreateAsync(user);
+
+            // send wellcome email
+            await _sendWellcomeEmailHandler.ExecuteAsync(new SendEmailRequest
+            {
+                Name = user.Name,
+                Email = user.Email,
+                Data = new
+                {
+                    name = user.Name
+                }
+            });
 
             return new UserResponse
             {

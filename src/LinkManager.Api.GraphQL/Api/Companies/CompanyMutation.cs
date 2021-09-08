@@ -14,7 +14,14 @@ namespace LinkManager.Api.GraphQL.Api.Companies
     public class CompanyMutation
     {
         [Authorize]
-        public async Task<UpdateCompanyResponse> UpdateCompany([Service] IUpdateCompanyHandler handler, ClaimsPrincipal claimsPrincipal, UpdateCompanyRequest request)
+        public async Task<CompanyResponse> CreateCompany([Service] ICreateCompanyHandler handler, ClaimsPrincipal claimsPrincipal, CreateCompanyRequest request)
+        {
+            request.UserId = Guid.Parse(claimsPrincipal.FindFirstValue("id"));
+            return await handler.ExecuteAsync(request);
+        }
+
+        [Authorize]
+        public async Task<CompanyResponse> UpdateCompany([Service] IUpdateCompanyHandler handler, ClaimsPrincipal claimsPrincipal, UpdateCompanyRequest request)
         {
             request.UserId = Guid.Parse(claimsPrincipal.FindFirstValue("id"));
             return await handler.ExecuteAsync(request);
