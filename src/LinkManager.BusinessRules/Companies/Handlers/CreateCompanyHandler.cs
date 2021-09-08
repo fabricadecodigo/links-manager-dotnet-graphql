@@ -9,44 +9,33 @@ using System.Threading.Tasks;
 
 namespace LinkManager.BusinessRules.Companies.Handlers
 {
-    public class UpdateCompanyHandler : IUpdateCompanyHandler
+    public class CreateCompanyHandler : ICreateCompanyHandler
     {
         private readonly IMapper _mapper;
-        private readonly ICompanyRepository _repository;
+        private readonly ICompanyRepository _companyRepository;
         private readonly ICompanyValidator _companyValidator;
 
-        public UpdateCompanyHandler(
+        public CreateCompanyHandler(
             IMapper mapper,
-            ICompanyRepository repository,
+            ICompanyRepository companyRepository,
             ICompanyValidator companyValidator
         )
         {
             _mapper = mapper;
-            _repository = repository;
+            _companyRepository = companyRepository;
             _companyValidator = companyValidator;
         }
 
-        public async Task<CompanyResponse> ExecuteAsync(UpdateCompanyRequest request)
+        public async Task<CompanyResponse> ExecuteAsync(CreateCompanyRequest request)
         {
-            var company = await _repository.GetByUserIdAsync(request.UserId);
-            if (company == null)
-            {
-                throw new NotFoundException("Empresa não encontrada");
-            }
-
-            if (company.UserId != request.UserId)
-            {
-                throw new UnauthorizedException("Você não pode alterar essa empresa");
-            }
-
-            company = _mapper.Map<Company>(request);
+            var company = _mapper.Map<Company>(request);
             var validationResult = _companyValidator.Validate(company);
             if (!validationResult.IsValid)
             {
-                throw new ValidationException("Erro ao alterar a empresa", validationResult.Errors);
+                throw new ValidationException("Erro ao criar a empresa", validationResult.Errors);
             }
 
-            company = await _repository.UpdateAsync(company.Id, company);
+            company = await _companyRepository.CreateAsync(company);
 
             return new CompanyResponse
             {

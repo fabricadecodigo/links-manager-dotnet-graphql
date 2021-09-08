@@ -17,24 +17,24 @@ namespace LinkManager.BusinessRules.Extensions
                 // Emails
                 .AddScoped<ISendWellcomeEmailHandler, SendWellcomeEmailHandler>()
                 .AddScoped<ISendForgotPasswordEmailHandler, SendForgotPasswordEmailHandler>()
-
-                // Onboarding
-                .AddScoped<ICreateAccountHandler, CreateAccountHandler>()
-
-                // Authentication
-                .AddScoped<ILoginHandler, LoginHandler>()
-
+                
                 // account
+                .AddScoped<ICreateAccountHandler, CreateAccountHandler>()
                 .AddScoped<IForgotPassowordHandler, ForgotPassowordHandler>()
                 .AddScoped<IForgotPasswordExpiredHandler, ForgotPasswordExpiredHandler>()
                 .AddScoped<IResetPasswordHandler, ResetPasswordHandler>()
 
+                // Authentication
+                .AddScoped<ILoginHandler, LoginHandler>()
+
                 // users
+                .AddScoped<ICreateUserHandler, CreateUserHandler>()
                 .AddScoped<IUpdateUserHandler, UpdateUserHandler>()
                 .AddScoped<IGetUserByIdHandler, GetUserByIdHandler>()
                 .AddScoped<IUpdatePasswordHandler, UpdatePasswordHandler>()
 
                 // Companies
+                .AddScoped<ICreateCompanyHandler, CreateCompanyHandler>()
                 .AddScoped<IUpdateCompanyHandler, UpdateCompanyHandler>()
                 .AddScoped<IGetCompanyByIdHandler, GetCompanyByIdHandler>()
 

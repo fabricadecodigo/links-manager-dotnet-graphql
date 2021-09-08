@@ -2,7 +2,7 @@ using System;
 
 namespace LinkManager.BusinessRules.Companies.Responses
 {
-    public class CompanyReponseItem
+    public class CompanyResponseItem
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -1,6 +1,6 @@
 namespace LinkManager.BusinessRules.Companies.Responses
 {
-    public class CompanyResponse : BusinessRuleResponse<CompanyReponseItem>
+    public class CompanyResponse : BusinessRuleResponse<CompanyResponseItem>
     {        
     }
 }

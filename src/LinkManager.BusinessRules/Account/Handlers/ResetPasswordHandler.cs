@@ -1,6 +1,5 @@
 using LinkManager.BusinessRules.Account.Requests;
 using LinkManager.BusinessRules.Account.Responses;
-using LinkManager.BusinessRules.Account.Validators;
 using LinkManager.BusinessRules.Exceptions;
 using LinkManager.Domain.Repositories;
 using LinkManager.Helpers.Crypt;
@@ -13,31 +12,28 @@ namespace LinkManager.BusinessRules.Account.Handlers
         private readonly ICryptHelper _cryptHelper;
         private readonly IUserRepository _userRepository;
         private readonly IForgotPasswordRepository _forgotPasswordRepository;
-        private readonly IResetPasswordValidator _resetPasswordValidator;
         private readonly IForgotPasswordExpiredHandler _forgotPasswordExpiredHandler;
 
         public ResetPasswordHandler(
             ICryptHelper cryptHelper,
             IUserRepository userRepository,
             IForgotPasswordRepository forgotPasswordRepository,
-            IResetPasswordValidator resetPasswordValidator,
             IForgotPasswordExpiredHandler forgotPasswordExpiredHandler
         )
         {
             _cryptHelper = cryptHelper;
             _userRepository = userRepository;
             _forgotPasswordRepository = forgotPasswordRepository;
-            _resetPasswordValidator = resetPasswordValidator;
             _forgotPasswordExpiredHandler = forgotPasswordExpiredHandler;
         }
 
         public async Task<ResetPasswordResponse> ExecuteAsync(ResetPasswordRequest request)
         {
-            var validationResult = _resetPasswordValidator.Validate(request);
-            if (!validationResult.IsValid)
-            {
-                throw new ValidationException("Erro ao resetar a senha", validationResult.Errors);
-            }
+            // var validationResult = _resetPasswordValidator.Validate(request);
+            // if (!validationResult.IsValid)
+            // {
+            //     throw new ValidationException("Erro ao resetar a senha", validationResult.Errors);
+            // }
 
             var forgotPassword = await _forgotPasswordRepository.GetByIdAsync(request.Id);
             if (forgotPassword == null)

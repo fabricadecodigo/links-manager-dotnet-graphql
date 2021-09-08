@@ -22,7 +22,7 @@ namespace LinkManager.BusinessRules.Companies.Handlers
 
             return new CompanyResponse
             {
-                Payload = new CompanyReponseItem
+                Payload = new CompanyResponseItem
                 {
                     Id = company.Id,
                     Name = company.Name,
