@@ -35,7 +35,7 @@ namespace LinkManager.BusinessRules.Links.Handlers
                 throw new NotFoundException("Link não encontrado");
             }
 
-            link = _mapper.Map<Link>(request);
+            _mapper.Map(request, link);
             var validationResult = _linkValidator.Validate(link);
             if (!validationResult.IsValid)
             {

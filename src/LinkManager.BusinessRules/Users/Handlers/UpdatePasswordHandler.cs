@@ -1,7 +1,10 @@
+using AutoMapper;
 using LinkManager.BusinessRules.Exceptions;
 using LinkManager.BusinessRules.Users.Requests;
 using LinkManager.BusinessRules.Users.Responses;
+using LinkManager.Domain.Entities;
 using LinkManager.Domain.Repositories;
+using LinkManager.Domain.Validators;
 using LinkManager.Helpers.Crypt;
 using System;
 using System.Threading.Tasks;
@@ -10,11 +13,23 @@ namespace LinkManager.BusinessRules.Users.Handlers
 {
     public class UpdatePasswordHandler : IUpdatePasswordHandler
     {
+        private readonly IMapper _mapper;
         private readonly ICryptHelper _cryptHelper;
         private readonly IUserRepository _repository;
+        private readonly IUserValidator _userValidator;
 
-        public UpdatePasswordHandler(ICryptHelper cryptHelper, IUserRepository repository)
-            => (_cryptHelper, _repository) = (cryptHelper, repository);
+        public UpdatePasswordHandler(
+            IMapper mapper,
+            ICryptHelper cryptHelper,
+            IUserRepository repository,
+            IUserValidator userValidator
+        )
+        {
+            _mapper = mapper;
+            _cryptHelper = cryptHelper;
+            _repository = repository;
+            _userValidator = userValidator;
+        }
 
         public async Task<UserResponse> ExecuteAsync(UpdatePasswordRequest request)
         {
@@ -29,22 +44,15 @@ namespace LinkManager.BusinessRules.Users.Handlers
                 throw new UnprocessableEntityException("Senha inválida");
             }
 
-            var newPasswordHash = _cryptHelper.Encrypt(request.NewPassword);
+            // criptografando a senha
+            request.NewPassword = _cryptHelper.Encrypt(request.NewPassword);
 
-            user.Password = newPasswordHash;
-            user.UpdateAt = DateTime.Now;
+            _mapper.Map(request, user);
             await _repository.UpdateAsync(user.Id, user);
 
             return new UserResponse
             {
-                Payload = new UserResponseItem
-                {
-                    Id = user.Id,
-                    Name = user.Name,
-                    Email = user.Email,
-                    CreateAt = user.CreateAt,
-                    UpdateAt = user.UpdateAt
-                }
+                Payload = _mapper.Map<UserResponseItem>(user)
             };
         }
     }

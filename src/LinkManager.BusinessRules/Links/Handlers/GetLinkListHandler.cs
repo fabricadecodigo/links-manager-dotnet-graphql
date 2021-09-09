@@ -1,3 +1,4 @@
+using AutoMapper;
 using LinkManager.BusinessRules.Links.Requests;
 using LinkManager.BusinessRules.Links.Responses;
 using LinkManager.Domain.Repositories;
@@ -9,13 +10,23 @@ namespace LinkManager.BusinessRules.Links.Handlers
 {
     public class GetLinkListHandler : IGetLinkListHandler
     {
-        private readonly ILinkRepository _repository;
+        private readonly IMapper _mapper;
+        private readonly ILinkRepository _linkRepository;
 
-        public GetLinkListHandler(ILinkRepository repository) => _repository = repository;
+        public GetLinkListHandler(
+            IMapper mapper,
+            ILinkRepository linkRepository
+        )
+        {
+            _mapper = mapper;
+            _linkRepository = linkRepository;
+        }
+
+        public GetLinkListHandler(ILinkRepository repository) => _linkRepository = repository;
 
         public async Task<LinkListResponse> ExecuteAsync(GetLinkListRequest request)
         {
-            var query = _repository.GetQuery()
+            var query = _linkRepository.GetQuery()
                 .Where(q => q.CompanyId == request.CompanyId);
 
             if (!string.IsNullOrEmpty(request.Title))
@@ -33,20 +44,12 @@ namespace LinkManager.BusinessRules.Links.Handlers
                 query = query.Where(q => q.Active == request.Active.Value);
             }
 
-            var links = await _repository.GetAllAsync(query);
+            var links = await _linkRepository.GetAllAsync(query);
 
             return new LinkListResponse
             {
                 Payload = links
-                    .Select(l => new LinkResponseItem()
-                    {
-                        Id = l.Id,
-                        Title = l.Title,
-                        Uri = l.Uri,
-                        Active = l.Active,
-                        CreateAt = l.CreateAt,
-                        UpdateAt = l.UpdateAt
-                    })
+                    .Select(l => _mapper.Map<LinkResponseItem>(l))
                     .ToList()
             };
         }

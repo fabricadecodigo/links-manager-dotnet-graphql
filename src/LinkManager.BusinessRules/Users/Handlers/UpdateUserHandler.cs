@@ -40,7 +40,7 @@ namespace LinkManager.BusinessRules.Users.Handlers
                 throw new ValidationException("Erro ao alterar um usuário", validationResult.Errors);
             };
 
-            user = _mapper.Map<User>(request);
+            _mapper.Map(request, user);
             await _userRepository.UpdateAsync(user.Id, user);
 
             return new UserResponse

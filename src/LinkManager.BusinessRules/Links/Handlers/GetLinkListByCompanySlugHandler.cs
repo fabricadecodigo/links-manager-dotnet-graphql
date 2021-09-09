@@ -1,24 +1,26 @@
+using AutoMapper;
+using LinkManager.BusinessRules.Exceptions;
+using LinkManager.BusinessRules.Links.Requests;
+using LinkManager.BusinessRules.Links.Responses;
 using LinkManager.Domain.Repositories;
-
+using MongoDB.Driver.Linq;
+using System.Linq;
+using System.Threading.Tasks;
 namespace LinkManager.BusinessRules.Links.Handlers
 {
-    using LinkManager.BusinessRules.Exceptions;
-    using LinkManager.BusinessRules.Links.Requests;
-    using LinkManager.BusinessRules.Links.Responses;
-    using MongoDB.Driver.Linq;
-    using System.Linq;
-    using System.Threading.Tasks;
-
     public class GetLinkListByCompanySlugHandler : IGetLinkListByCompanySlugHandler
     {
+        private readonly IMapper _mapper;
         private readonly ICompanyRepository _companyRepository;
         private readonly ILinkRepository _linkRepository;
 
         public GetLinkListByCompanySlugHandler(
+            IMapper mapper,
             ICompanyRepository companyRepository,
             ILinkRepository linkRepository
         )
         {
+            _mapper = mapper;
             _companyRepository = companyRepository;
             _linkRepository = linkRepository;
         }
@@ -42,15 +44,7 @@ namespace LinkManager.BusinessRules.Links.Handlers
             return new LinkListResponse
             {
                 Payload = links
-                    .Select(l => new LinkResponseItem()
-                    {
-                        Id = l.Id,
-                        Title = l.Title,
-                        Uri = l.Uri,
-                        Active = l.Active,
-                        CreateAt = l.CreateAt,
-                        UpdateAt = l.UpdateAt
-                    })
+                    .Select(l => _mapper.Map<LinkResponseItem>(l))
                     .ToList()
             };
         }

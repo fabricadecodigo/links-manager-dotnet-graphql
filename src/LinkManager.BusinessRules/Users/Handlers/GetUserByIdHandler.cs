@@ -1,3 +1,4 @@
+using AutoMapper;
 using LinkManager.BusinessRules.Exceptions;
 using LinkManager.BusinessRules.Users.Requests;
 using LinkManager.BusinessRules.Users.Responses;
@@ -8,9 +9,17 @@ namespace LinkManager.BusinessRules.Users.Handlers
 {
     public class GetUserByIdHandler : IGetUserByIdHandler
     {
+        private readonly IMapper _mapper;
         private readonly IUserRepository _repository;
 
-        public GetUserByIdHandler(IUserRepository repository) => _repository = repository;
+        public GetUserByIdHandler(
+            IMapper mapper,
+            IUserRepository repository
+        )
+        {
+            _mapper = mapper;
+            _repository = repository;
+        }
 
         public async Task<UserResponse> ExecuteAsync(GetUserByIdRequest request)
         {
@@ -22,14 +31,7 @@ namespace LinkManager.BusinessRules.Users.Handlers
 
             return new UserResponse
             {
-                Payload = new UserResponseItem()
-                {
-                    Id = user.Id,
-                    Name = user.Name,
-                    Email = user.Email,
-                    CreateAt = user.CreateAt,
-                    UpdateAt = user.UpdateAt
-                }
+                Payload = _mapper.Map<UserResponseItem>(user)
             };
         }
     }
