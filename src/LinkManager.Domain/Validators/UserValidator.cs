@@ -7,7 +7,9 @@ namespace LinkManager.Domain.Validators
     public class UserValidator : AbstractValidator<User>, IUserValidator
     {
         public UserValidator(
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            IPasswordValidator passwordValidator,
+            IEmailValidator emailValidator
         )
         {
             RuleFor(r => r.Name)
@@ -17,11 +19,7 @@ namespace LinkManager.Domain.Validators
                 .WithName("Nome");
 
             RuleFor(r => r.Email)
-                .NotEmpty()
-                .MinimumLength(2)
-                .MaximumLength(200)
-                .EmailAddress()
-                .WithName("E-mail");
+                .SetValidator(emailValidator);
 
             RuleFor(r => r)
                 .MustAsync(async (user, cancellation) =>
@@ -37,9 +35,7 @@ namespace LinkManager.Domain.Validators
                 .WithMessage("O email informado já está sendo usado.");
 
             RuleFor(r => r.Password)
-                .NotEmpty()
-                .MinimumLength(2)
-                .WithName("Senha");
+                .SetValidator(passwordValidator);
         }
     }
 }

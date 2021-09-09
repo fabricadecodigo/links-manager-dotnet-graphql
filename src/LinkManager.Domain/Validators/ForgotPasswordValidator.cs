@@ -5,13 +5,12 @@ namespace LinkManager.Domain.Validators
 {
     public class ForgotPasswordValidator : AbstractValidator<ForgotPassword>, IForgotPasswordValidator
     {
-        public ForgotPasswordValidator()
+        public ForgotPasswordValidator(
+            IEmailValidator emailValidator
+        )
         {
             RuleFor(r => r.Email)
-                .NotNull()
-                .NotEmpty()
-                .EmailAddress()
-                .WithName("E-mail");
+                .SetValidator(emailValidator);
         }
     }
 }
