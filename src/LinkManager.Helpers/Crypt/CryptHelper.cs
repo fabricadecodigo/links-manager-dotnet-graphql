@@ -1,5 +1,7 @@
 namespace LinkManager.Helpers.Crypt
 {
+    using System;
+
     // https://github.com/BcryptNet/bcrypt.net
     public class CryptHelper : ICryptHelper
     {
@@ -11,7 +13,15 @@ namespace LinkManager.Helpers.Crypt
 
         public bool IsValid(string value, string hash)
         {
-            return BCrypt.Net.BCrypt.Verify(value, hash);
+            try
+            {
+                return BCrypt.Net.BCrypt.Verify(value, hash);
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
     }
 }

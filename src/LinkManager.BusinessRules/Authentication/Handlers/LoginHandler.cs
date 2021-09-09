@@ -6,6 +6,7 @@ using LinkManager.Domain.Entities;
 using LinkManager.Domain.Repositories;
 using LinkManager.Helpers.Crypt;
 using LinkManager.Helpers.Jwt;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -34,11 +35,6 @@ namespace LinkManager.BusinessRules.Authentication.Handlers
             }
 
             var company = await _companyRepository.GetByUserIdAsync(user.Id);
-            if (company == null)
-            {
-                throw new NotFoundException("Empresa não encontrada");
-            }
-
             var token = GenerateToken(user, company);
 
             return new LoginResponse
@@ -52,7 +48,7 @@ namespace LinkManager.BusinessRules.Authentication.Handlers
                         Name = user.Name,
                         Email = user.Email
                     },
-                    Company = new LoginResponseCompany
+                    Company = company == null ? null : new LoginResponseCompany
                     {
                         Id = company.Id,
                         Name = company.Name,
@@ -64,14 +60,19 @@ namespace LinkManager.BusinessRules.Authentication.Handlers
 
         private string GenerateToken(User user, Company company)
         {
-            var claims = new ClaimsIdentity(new Claim[]
+            var claimList = new List<Claim>()
             {
                 new Claim("id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim("company", company.Id.ToString())
-            });
+            };
 
+            if (company != null)
+            {
+                claimList.Add(new Claim("company", company.Id.ToString()));
+            }
+
+            var claims = new ClaimsIdentity(claimList);
             return _jwtToken.GenerateToken(claims);
         }
     }

@@ -44,7 +44,7 @@ namespace LinkManager.BusinessRules.Users.Handlers
                 throw new ValidationException("Erro ao criar um usuário", validationResult.Errors);
             };
 
-            request.Password = _cryptHelper.Encrypt(request.Password);
+            user.Password = _cryptHelper.Encrypt(request.Password);
             user = await _userRepository.CreateAsync(user);
 
             // send wellcome email

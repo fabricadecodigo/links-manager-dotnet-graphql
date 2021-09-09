@@ -35,6 +35,12 @@ namespace LinkManager.BusinessRules.Companies.Handlers
                 throw new ValidationException("Erro ao criar a empresa", validationResult.Errors);
             }
 
+            var userCompany = _companyRepository.GetByUserIdAsync(request.UserId);
+            if (userCompany != null)
+            {
+                throw new ConflictException("Você não pode criar novas empresas");
+            };
+
             company = await _companyRepository.CreateAsync(company);
 
             return new CompanyResponse

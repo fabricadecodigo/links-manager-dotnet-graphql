@@ -30,7 +30,7 @@ namespace LinkManager.Domain.Validators
                     var entity = await companyRepository.GetBySlugAsync(company.Slug);
                     if (entity != null)
                     {
-                        return company.Id != entity.Id;
+                        return company.Id == entity.Id;
                     }
 
                     return true;

@@ -27,7 +27,7 @@ namespace LinkManager.Domain.Validators
                     var entity = await userRepository.GetByEmailAsync(user.Email);
                     if (entity != null)
                     {
-                        return user.Id != entity.Id;
+                        return user.Id == entity.Id;
                     }
 
                     return true;
