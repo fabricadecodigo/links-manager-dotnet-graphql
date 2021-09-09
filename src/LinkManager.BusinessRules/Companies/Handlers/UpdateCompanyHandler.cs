@@ -39,7 +39,7 @@ namespace LinkManager.BusinessRules.Companies.Handlers
                 throw new UnauthorizedException("Você não pode alterar essa empresa");
             }
 
-            company = _mapper.Map<Company>(request);
+            _mapper.Map(request, company);
             var validationResult = _companyValidator.Validate(company);
             if (!validationResult.IsValid)
             {
