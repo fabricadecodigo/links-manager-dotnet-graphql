@@ -51,7 +51,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}    
-    - name: Serverless deploy
-      uses: serverless/github-action@v1
-      with:
-        args: deploy --stage prod --config src/LinkManager.Api.GraphQL/serverless.yml
+    - name: Deploy
+      run: |
+        cd src/LinkManager.Api.GraphQL
+        npm install serverless
+        serverless deploy --stage production
+
+
+    # - name: Serverless deploy
+    #   uses: serverless/github-action@v1
+    #   with:
+    #     args: deploy --stage prod --config src/LinkManager.Api.GraphQL/serverless.yml
