@@ -49,4 +49,4 @@ jobs:
     - name: Serverless deploy
       uses: serverless/github-action@v1
       with:
-        args: deploy --stage prod --config src/LinkManager.Api.GraphQL
+        args: deploy --stage prod --config src/LinkManager.Api.GraphQL/serverless.yml
