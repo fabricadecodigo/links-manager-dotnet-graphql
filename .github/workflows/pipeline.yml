@@ -46,9 +46,10 @@ jobs:
       with:
         name: deploy-package.zip
         path: src/LinkManager.Api.GraphQL/bin/serverless/deploy-package.zip
-    - name: Current dir
-      run: echo $PWD
     - name: Serverless deploy
       uses: serverless/github-action@v1
+      run: |
+        cd src/LinkManager.Api.GraphQL
+        echo $PWD
       with:
         args: --stage prod deploy
