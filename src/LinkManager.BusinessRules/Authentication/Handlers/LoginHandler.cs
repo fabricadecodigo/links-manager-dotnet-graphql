@@ -37,24 +37,30 @@ namespace LinkManager.BusinessRules.Authentication.Handlers
             var company = await _companyRepository.GetByUserIdAsync(user.Id);
             var token = GenerateToken(user, company);
 
+            var payload = new LoginResponseData
+            {
+                AccessToken = token,
+                User = new LoginResponseUser
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Email = user.Email
+                },
+            };
+
+            if (company != null)
+            {
+                payload.Company = new LoginResponseCompany
+                {
+                    Id = company.Id,
+                    Name = company.Name,
+                    Slug = company.Slug
+                };
+            }
+
             return new LoginResponse
             {
-                Payload = new LoginResponseData
-                {
-                    AccessToken = token,
-                    User = new LoginResponseUser
-                    {
-                        Id = user.Id,
-                        Name = user.Name,
-                        Email = user.Email
-                    },
-                    Company = company == null ? null : new LoginResponseCompany
-                    {
-                        Id = company.Id,
-                        Name = company.Name,
-                        Slug = company.Slug
-                    }
-                }
+                Payload = payload
             };
         }
 
