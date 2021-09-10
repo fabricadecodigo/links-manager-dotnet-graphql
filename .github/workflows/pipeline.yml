@@ -30,6 +30,7 @@ jobs:
           path: src/LinkManager.Api.GraphQL/bin/serverless/deploy-package.zip
   deploy:
     name: deploy
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
