@@ -23,3 +23,8 @@ jobs:
         dotnet new tool-manifest
         dotnet tool install Amazon.Lambda.Tools
         dotnet lambda package
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+          name: deploy-package.zip
+          path: src/LinkManager.Api.GraphQL/bin/serverless/deploy-package.zip
