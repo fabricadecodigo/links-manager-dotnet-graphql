@@ -4,7 +4,7 @@ provider:
   name: aws
   endpointType: EDGE
   runtime: dotnetcore3.1
-  stage: dev
+  stage: development
   region: us-east-1
   environment:
     ASPNETCORE_ENVIRONMENT: ${opt:stage, self:provider.stage}  
