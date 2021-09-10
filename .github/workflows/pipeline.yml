@@ -28,3 +28,25 @@ jobs:
       with:
           name: deploy-package.zip
           path: src/LinkManager.Api.GraphQL/bin/serverless/deploy-package.zip
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: |
+        cd src/LinkManager.Api.GraphQL
+    - name: Download artifact  
+      uses: actions/download-artifact@v2
+      with:
+        name: deploy-package.zip
+    - name: Serverless deploy
+      uses: serverless/github-action@v1
+      with:
+        args: --stage prod deploy
