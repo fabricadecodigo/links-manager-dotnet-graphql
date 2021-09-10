@@ -16,4 +16,12 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore    
+      run: dotnet build --no-restore
+    - name: Package
+      run: |
+        cd src/LinkManager.Api.GraphQL
+        dotnet new tool-manifest
+        dotnet tool install Amazon.Lambda.Tools
+        dotnet lambda package
+      artifacts:
+        - src/LinkManager.Api.GraphQL/bin/serverless/deploy-package.zip
