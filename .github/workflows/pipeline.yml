@@ -37,15 +37,20 @@ jobs:
         node-version: [14.x]
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
     - name: Download artifact  
       uses: actions/download-artifact@v2
       with:
         name: deploy-package.zip
-        path: src/LinkManager.Api.GraphQL/bin/serverless/deploy-package.zip
+        path: src/LinkManager.Api.GraphQL/bin/serverless
+
+    - name: Display structure of downloaded files
+      run: ls -R
+      working-directory: src/LinkManager.Api.GraphQL/bin/serverless
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}    
     - name: Serverless deploy
       uses: serverless/github-action@v1
       with:
