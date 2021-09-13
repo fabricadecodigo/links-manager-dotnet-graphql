@@ -7,7 +7,6 @@ namespace LinkManager.BusinessRules.Companies.Requests
     {
         public string Name { get; set; }
         public string Slug { get; set; }
-        [GraphQLIgnore]
         public Guid UserId { get; set; }
     }
 }

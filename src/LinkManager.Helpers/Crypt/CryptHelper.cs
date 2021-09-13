@@ -1,7 +1,5 @@
 namespace LinkManager.Helpers.Crypt
 {
-    using System;
-
     // https://github.com/BcryptNet/bcrypt.net
     public class CryptHelper : ICryptHelper
     {
@@ -17,9 +15,8 @@ namespace LinkManager.Helpers.Crypt
             {
                 return BCrypt.Net.BCrypt.Verify(value, hash);
             }
-            catch (System.Exception e)
+            catch
             {
-                Console.WriteLine(e.Message);
                 return false;
             }
         }

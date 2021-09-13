@@ -13,10 +13,8 @@ namespace LinkManager.Api.GraphQL.Api.Companies
     [ExtendObjectType(OperationTypeNames.Mutation)]
     public class CompanyMutation
     {
-        [Authorize]
         public async Task<CompanyResponse> CreateCompany([Service] ICreateCompanyHandler handler, ClaimsPrincipal claimsPrincipal, CreateCompanyRequest request)
         {
-            request.UserId = Guid.Parse(claimsPrincipal.FindFirstValue("id"));
             return await handler.ExecuteAsync(request);
         }
 

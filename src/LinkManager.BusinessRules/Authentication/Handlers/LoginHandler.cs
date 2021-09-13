@@ -35,32 +35,31 @@ namespace LinkManager.BusinessRules.Authentication.Handlers
             }
 
             var company = await _companyRepository.GetByUserIdAsync(user.Id);
-            var token = GenerateToken(user, company);
-
-            var payload = new LoginResponseData
+            if (company == null)
             {
-                AccessToken = token,
-                User = new LoginResponseUser
-                {
-                    Id = user.Id,
-                    Name = user.Name,
-                    Email = user.Email
-                },
-            };
-
-            if (company != null)
-            {
-                payload.Company = new LoginResponseCompany
-                {
-                    Id = company.Id,
-                    Name = company.Name,
-                    Slug = company.Slug
-                };
+                throw new NotFoundException("Empresa não encontrada");
             }
+
+            var token = GenerateToken(user, company);
 
             return new LoginResponse
             {
-                Payload = payload
+                Payload = new LoginResponseData
+                {
+                    AccessToken = token,
+                    User = new LoginResponseUser
+                    {
+                        Id = user.Id,
+                        Name = user.Name,
+                        Email = user.Email
+                    },
+                    Company = new LoginResponseCompany
+                    {
+                        Id = company.Id,
+                        Name = company.Name,
+                        Slug = company.Slug
+                    }
+                }
             };
         }
 
@@ -71,12 +70,8 @@ namespace LinkManager.BusinessRules.Authentication.Handlers
                 new Claim("id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
+                new Claim("company", company.Id.ToString())
             };
-
-            if (company != null)
-            {
-                claimList.Add(new Claim("company", company.Id.ToString()));
-            }
 
             var claims = new ClaimsIdentity(claimList);
             return _jwtToken.GenerateToken(claims);

@@ -36,6 +36,11 @@ namespace LinkManager.Domain.Validators
                     return true;
                 })
                 .WithMessage("O slug informado já está sendo usado.");
+
+            RuleFor(r => r.UserId)
+                .NotNull()
+                .NotEmpty()
+                .WithName("Usuário");
         }
     }
 }
