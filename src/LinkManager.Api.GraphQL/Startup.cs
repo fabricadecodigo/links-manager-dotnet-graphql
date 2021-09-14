@@ -1,4 +1,5 @@
 using HotChocolate.Types;
+using LinkManager.Domain.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,12 +42,16 @@ namespace LinkManager.Api.GraphQL
                     };
                 });
 
-                services
-                    .AddGraphQLServer()
-                    .AddAuthorization()
-                    // ajustando o formatodo tipo Guid para 00000000-0000-0000-0000-000000000000
-                    // https://chillicream.com/docs/hotchocolate/defining-a-schema/scalars/#net-scalars
-                    .AddType(new UuidType('D'));
+            services
+                .AddMongoDbClient(Configuration)
+                .AddMongoDbContext(Configuration);
+
+            services
+                .AddGraphQLServer()
+                .AddAuthorization()
+                // ajustando o formatodo tipo Guid para 00000000-0000-0000-0000-000000000000
+                // https://chillicream.com/docs/hotchocolate/defining-a-schema/scalars/#net-scalars
+                .AddType(new UuidType('D'));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
