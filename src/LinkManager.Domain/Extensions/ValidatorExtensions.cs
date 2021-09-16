@@ -9,7 +9,11 @@ namespace LinkManager.Domain.Extensions
         {
             return services
                 .AddScoped<IPasswordValidator, PasswordValidator>()
-                .AddScoped<IEmailValidator, EmailValidator>();
+                .AddScoped<IEmailValidator, EmailValidator>()
+                .AddScoped<IUserValidator, UserValidator>()
+                .AddScoped<ICompanyValidator, CompanyValidator>()
+                .AddScoped<ILinkValidator, LinkValidator>()
+                .AddScoped<IForgotPasswordValidator, ForgotPasswordValidator>();
         }
     }
 }
