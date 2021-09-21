@@ -1,4 +1,5 @@
 using HotChocolate.Types;
+using LinkManager.Api.GraphQL.Extensions;
 using LinkManager.BusinessRules.Extensions;
 using LinkManager.Domain.Extensions;
 using LinkManager.Helpers.Extensions;
@@ -26,7 +27,7 @@ namespace LinkManager.Api.GraphQL
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                // .AddAutoMapper(typeof(BusinessRules.BusinessRuleRequest))
+                .AddAutoMapper(typeof(BusinessRules.BusinessRuleRequest))
                 .AddAuthorization()
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -47,6 +48,7 @@ namespace LinkManager.Api.GraphQL
             services
                 .AddMongoDbClient(Configuration)
                 .AddMongoDbContext(Configuration)
+                .AddHttpClient()
                 .AddDomainValidators()
                 .AddHelpers()
                 .AddBusinessRules();
@@ -56,7 +58,8 @@ namespace LinkManager.Api.GraphQL
                 .AddAuthorization()
                 // ajustando o formatodo tipo Guid para 00000000-0000-0000-0000-000000000000
                 // https://chillicream.com/docs/hotchocolate/defining-a-schema/scalars/#net-scalars
-                .AddType(new UuidType('D'));
+                .AddType(new UuidType('D'))
+                .AddQueriesAndMutations();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
