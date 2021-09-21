@@ -14,4 +14,8 @@
     <ProjectReference Include="..\LinkManager.Domain\LinkManager.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="$(ProjectDir)\Emails\Templates\wellcome.html" />
+    <EmbeddedResource Include="$(ProjectDir)\Emails\Templates\forgot-password.html" />
+  </ItemGroup>
 </Project>
