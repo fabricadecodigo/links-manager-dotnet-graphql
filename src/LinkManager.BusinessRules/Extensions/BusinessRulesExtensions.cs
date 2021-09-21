@@ -9,7 +9,8 @@ namespace LinkManager.BusinessRules.Extensions
         {
             return services
                 // Emails
-                .AddScoped<ISendWellcomeEmailHandler, SendWellcomeEmailHandler>();
+                .AddScoped<ISendWellcomeEmailHandler, SendWellcomeEmailHandler>()
+                .AddScoped<ISendForgotPasswordEmailHandler, SendForgotPasswordEmailHandler>();
         }
     }
 }
