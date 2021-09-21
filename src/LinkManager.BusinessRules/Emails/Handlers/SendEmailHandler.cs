@@ -18,7 +18,7 @@ namespace LinkManager.BusinessRules.Emails.Handlers
             _emailTemplateHelper = emailTemplateHelper;
         }
         
-        public async Task ExecuteAsync(SendEmailRequest request)
+        public virtual async Task ExecuteAsync(SendEmailRequest request)
         {
             var html = _emailTemplateHelper
                 .SetTemplateAssembly(Assembly.GetAssembly(typeof(SendEmailRequest)))

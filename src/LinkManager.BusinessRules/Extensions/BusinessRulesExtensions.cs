@@ -1,3 +1,4 @@
+using LinkManager.BusinessRules.Emails.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LinkManager.BusinessRules.Extensions
@@ -6,7 +7,9 @@ namespace LinkManager.BusinessRules.Extensions
     {
         public static IServiceCollection AddBusinessRules(this IServiceCollection services)
         {
-            return services;
+            return services
+                // Emails
+                .AddScoped<ISendWellcomeEmailHandler, SendWellcomeEmailHandler>();
         }
     }
 }
