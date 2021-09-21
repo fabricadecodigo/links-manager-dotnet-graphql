@@ -1,4 +1,5 @@
 using HotChocolate.Types;
+using LinkManager.BusinessRules.Extensions;
 using LinkManager.Domain.Extensions;
 using LinkManager.Helpers.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -47,7 +48,8 @@ namespace LinkManager.Api.GraphQL
                 .AddMongoDbClient(Configuration)
                 .AddMongoDbContext(Configuration)
                 .AddDomainValidators()
-                .AddHelpers();
+                .AddHelpers()
+                .AddBusinessRules();
 
             services
                 .AddGraphQLServer()
