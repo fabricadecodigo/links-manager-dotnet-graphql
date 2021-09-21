@@ -1,4 +1,5 @@
 using HotChocolate.Execution.Configuration;
+using LinkManager.Api.GraphQL.Api.Users;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LinkManager.Api.GraphQL.Extensions
@@ -11,7 +12,9 @@ namespace LinkManager.Api.GraphQL.Extensions
         {
             return services
                 .AddQueryType()
-                .AddMutationType();
+                    .AddTypeExtension<UserQuery>()
+                .AddMutationType()
+                    .AddTypeExtension<UserMutation>();
         }
     }
 }
