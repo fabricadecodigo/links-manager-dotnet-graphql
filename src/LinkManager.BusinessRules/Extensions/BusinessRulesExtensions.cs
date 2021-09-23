@@ -1,3 +1,4 @@
+using LinkManager.BusinessRules.Companies.Handlers;
 using LinkManager.BusinessRules.Emails.Handlers;
 using LinkManager.BusinessRules.Users.Handlers;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +15,10 @@ namespace LinkManager.BusinessRules.Extensions
                 .AddScoped<ISendForgotPasswordEmailHandler, SendForgotPasswordEmailHandler>()
 
                 // users
-                .AddScoped<ICreateUserHandler, CreateUserHandler>();
+                .AddScoped<ICreateUserHandler, CreateUserHandler>()
+
+                // companies
+                .AddScoped<ICreateCompanyHandler, CreateCompanyHandler>();
         }
     }
 }
