@@ -1,3 +1,4 @@
+using LinkManager.BusinessRules.Account.Handlers;
 using LinkManager.BusinessRules.Authentication.Handlers;
 using LinkManager.BusinessRules.Companies.Handlers;
 using LinkManager.BusinessRules.Emails.Handlers;
@@ -17,6 +18,11 @@ namespace LinkManager.BusinessRules.Extensions
 
                 // authentication
                 .AddScoped<ILoginHandler, LoginHandler>()
+
+                // account
+                .AddScoped<IForgotPassowordHandler, ForgotPassowordHandler>()
+                .AddScoped<IForgotPasswordExpiredHandler, ForgotPasswordExpiredHandler>()
+                .AddScoped<IResetPasswordHandler, ResetPasswordHandler>()
 
                 // users
                 .AddScoped<ICreateUserHandler, CreateUserHandler>()
