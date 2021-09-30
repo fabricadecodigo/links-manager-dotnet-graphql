@@ -10,6 +10,9 @@ namespace LinkManager.BusinessRules.Users
         public UserProfile()
         {
             CreateMap<CreateUserRequest, User>();
+            CreateMap<UpdateUserRequest, User>();
+            CreateMap<UpdatePasswordRequest, User>()
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.NewPassword));
             CreateMap<User, UserResponseItem>();
         }
     }

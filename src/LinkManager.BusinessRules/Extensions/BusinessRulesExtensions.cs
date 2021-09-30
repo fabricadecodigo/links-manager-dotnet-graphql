@@ -26,6 +26,8 @@ namespace LinkManager.BusinessRules.Extensions
 
                 // users
                 .AddScoped<ICreateUserHandler, CreateUserHandler>()
+                .AddScoped<IUpdateUserHandler, UpdateUserHandler>()
+                .AddScoped<IUpdatePasswordHandler, UpdatePasswordHandler>()
 
                 // companies
                 .AddScoped<ICreateCompanyHandler, CreateCompanyHandler>();
