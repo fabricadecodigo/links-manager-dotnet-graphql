@@ -32,5 +32,15 @@ namespace LinkManager.Api.GraphQL.Api.Links
             request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
             return await handler.ExecuteAsync(request);
         }
+
+        [Authorize]
+        public async Task<DeleteLinkResponse> DeleteLink(
+            [Service] IDeleteLinkHandler handler, 
+            ClaimsPrincipal claimsPrincipal, 
+            DeleteLinkRequest request)
+        {
+            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
+            return await handler.ExecuteAsync(request);
+        }
     }
 }
