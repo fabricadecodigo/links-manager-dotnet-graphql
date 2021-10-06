@@ -15,6 +15,7 @@ namespace LinkManager.Api.GraphQL.Extensions
                 .AddQueryType()
                     .AddTypeExtension<AccountQuery>()
                     .AddTypeExtension<UserQuery>()
+                    .AddTypeExtension<CompanyQuery>()
                 .AddMutationType()
                     .AddTypeExtension<AuthenticationMutation>()
                     .AddTypeExtension<AccountMutation>()
