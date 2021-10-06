@@ -10,6 +10,7 @@ namespace LinkManager.BusinessRules.Companies
         public CompanyProfile()
         {
             CreateMap<CreateCompanyRequest, Company>();
+            CreateMap<UpdateCompanyRequest, Company>();
             CreateMap<Company, CompanyResponseItem>();
         }
     }
