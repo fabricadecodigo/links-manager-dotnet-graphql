@@ -10,6 +10,7 @@ namespace LinkManager.BusinessRules.Links
         public LinkProfile()
         {
             CreateMap<CreateLinkRequest, Link>();
+            CreateMap<UpdateLinkRequest, Link>();
             CreateMap<Link, LinkResponseItem>();
         }
     }

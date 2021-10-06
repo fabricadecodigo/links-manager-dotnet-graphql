@@ -37,7 +37,8 @@ namespace LinkManager.BusinessRules.Extensions
                 .AddScoped<IGetCompanyByUserIdHandler, GetCompanyByUserIdHandler>()
 
                 // Links
-                .AddScoped<ICreateLinkHandler, CreateLinkHandler>();
+                .AddScoped<ICreateLinkHandler, CreateLinkHandler>()
+                .AddScoped<IUpdateLinkHandler, UpdateLinkHandler>();
         }
     }
 }
