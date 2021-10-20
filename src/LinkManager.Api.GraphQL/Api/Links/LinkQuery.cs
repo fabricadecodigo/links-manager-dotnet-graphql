@@ -20,5 +20,12 @@ namespace LinkManager.Api.GraphQL.Api.Links
             request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
             return await handler.ExecuteAsync(request);
         }
+
+        [Authorize]
+        public async Task<LinkResponse> GetLink([Service] IGetLinkByIdHandler handler, ClaimsPrincipal claimsPrincipal, GetLinkByIdRequest request)
+        {
+            request.CompanyId = Guid.Parse(claimsPrincipal.FindFirstValue("company"));
+            return await handler.ExecuteAsync(request);
+        }
     }
 }
