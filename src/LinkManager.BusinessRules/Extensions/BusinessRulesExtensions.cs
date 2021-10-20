@@ -41,7 +41,8 @@ namespace LinkManager.BusinessRules.Extensions
                 .AddScoped<IUpdateLinkHandler, UpdateLinkHandler>()
                 .AddScoped<IDeleteLinkHandler, DeleteLinkHandler>()
                 .AddScoped<IGetLinkListHandler, GetLinkListHandler>()
-                .AddScoped<IGetLinkByIdHandler, GetLinkByIdHandler>();
+                .AddScoped<IGetLinkByIdHandler, GetLinkByIdHandler>()
+                .AddScoped<IGetLinkListByCompanySlugHandler, GetLinkListByCompanySlugHandler>();
         }
     }
 }
